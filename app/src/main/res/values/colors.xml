@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- COLORES STANDARD-->
+
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorApp">#FAB314</color>
+
+    <!-- CREAR COLORES-->
+    <color name="colorBlanco">#FFFFFF</color>
+    <color name="colorGris">#bcbcbc</color>
+    <color name="colorGrisClaro">#f5f5f5</color>
+    <color name="colorGrisOscuro">#898989</color>
+    <color name="colorNotAvailable">#F7C960</color>
+    <color name="colorNegro">#1D1D1D</color>
+    <color name="colorRojo">#DF3636</color>
+    <color name="colorVerde">#71CF44</color>
+
+    <!-- OTHER COLORs-->
+    <color name="colorAlternativo">#292727</color>
+
+    <color name="colorGris2">#6D6D6D</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#FAB314</color>
+</resources>

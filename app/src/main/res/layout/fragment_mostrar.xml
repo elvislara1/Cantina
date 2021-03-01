@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/colorBlanco"
+    tools:context=".MostrarFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="694dp"
+            android:layout_weight="20">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="370dp"
+                android:layout_gravity="top|center"
+                android:adjustViewBounds="true"
+                android:padding="40dp"
+                android:src="@drawable/triangulo" />
+
+            <ImageView
+                android:id="@+id/corazon"
+                android:src="@drawable/ic_cora"
+                android:layout_width="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginRight="40dp"
+                android:layout_gravity="center|right"
+                android:visibility="gone"
+                android:layout_height="50dp"/>
+            <ImageView
+                android:id="@+id/corazonb"
+                android:src="@drawable/ic_cora_border"
+                android:layout_width="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginRight="40dp"
+                android:layout_gravity="center|right"
+                android:layout_height="50dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="80"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Triangulo"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="38sp" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="27sp" />
+
+                <TextView
+                    android:id="@+id/precio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1€"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="150dp"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/decrement"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="17dp"
+                    android:background="@drawable/button_rounded2"
+                    android:text="—"/>
+
+                <TextView
+                    android:background="@drawable/rounded_corners"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="1"
+                    android:textSize="17dp"
+                    android:textColor="@android:color/black"
+                    android:inputType="number"
+                    android:id="@+id/display"
+                    android:gravity="center" />
+                <Button
+                    android:id="@+id/increment"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="+"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/button_rounded"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginBottom="70dp"
+                android:layout_gravity="bottom">
+
+                <Button
+                    android:id="@+id/addToCart"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_rounded_login"
+                    android:fontFamily="sans-serif-light"
+                    android:text="ADD TO CART"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlanco"
+                    android:textSize="25sp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</ScrollView>

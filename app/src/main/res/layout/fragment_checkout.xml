@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    tools:context=".CheckoutFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/colorGris2"
+            android:textStyle="bold"
+            android:text="Seleccione una de las opciones"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/comerOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Para llevar"
+                android:checked="true"
+                android:textColor="@color/colorGrisOscuro"
+                android:textSize="20dp"/>
+            <RadioButton
+                android:id="@+id/comerIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrisOscuro"
+                android:text="Para comer en la cantina"
+                android:textSize="20dp"/>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_bebida"
+                android:layout_marginTop="5dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/imagen1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_canteen"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/siguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorBlanco"
+            android:textStyle="bold"
+            android:background="@drawable/button_rounded_login"
+            android:text="CONFIRMAR"/>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Inicio" />
+
+    <item
+        android:id="@+id/perfilFragment"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Perfil" />
+
+    <item
+        android:id="@+id/ayudaFragment"
+        android:icon="@drawable/ic_ayuda"
+        android:title="Ayuda General" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Horarios"/>
+
+    <item android:title="General">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/cerrarSesion"
+                    android:icon="@drawable/cerrar_session"
+                    android:title="Cerrar Sesion" />
+            </group>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NuevoProductoFragment"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"/>
+    <EditText
+        android:id="@+id/precio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="precio"/>
+    <EditText
+        android:id="@+id/tipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tipo"/>
+    <ImageView
+        android:id="@+id/portada"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_photo_alternate_24"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/insertar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INSERTAR"
+        android:textColor="@color/colorBlanco"
+        app:backgroundTint="@color/colorAlternativo" />
+</LinearLayout>
