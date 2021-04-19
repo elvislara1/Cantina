@@ -68,6 +68,7 @@ public abstract class ProductosFragment extends Fragment {
             }
             productosAdapter.setProductoList(productos);
         });
+        //elvistuaplicacionesgenial
     }
     abstract LiveData<List<Producto>> obtenerProductos();
 
