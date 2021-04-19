@@ -1,11 +1,14 @@
 package com.example.cantina;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,11 @@ import com.example.cantina.databinding.DrawerHeaderBinding;
 import com.example.cantina.model.Usuario;
 import com.example.cantina.viewmodel.AutenticacionViewModel;
 import com.example.cantina.viewmodel.CantinaViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            setContentView((binding = ActivityMainBinding.inflate(getLayoutInflater())).getRoot());
+        setContentView((binding = ActivityMainBinding.inflate(getLayoutInflater())).getRoot());
+
+        signInClient.launch(GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
 
         drawerHeaderBinding = DrawerHeaderBinding.bind(binding.navView.getHeaderView(0));
         autenticacionViewModel = new ViewModelProvider(this).get(AutenticacionViewModel.class);
@@ -138,6 +148,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    ActivityResultLauncher<Intent> signInClient = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        try {
+            FirebaseAuth.getInstance().signInWithCredential(GoogleAuthProvider.getCredential(GoogleSignIn.getSignedInAccountFromIntent(result.getData()).getResult(ApiException.class).getIdToken(), null));
+        } catch (ApiException e) {}
+    });
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
         SearchFragmentItem = menu.findItem(R.id.searchFragment);
