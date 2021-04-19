@@ -143,7 +143,7 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
         LiveData<Integer> isFavorite(int userId, int productId);
 
         //buscar
-        @Query("SELECT Producto.productoId, Producto.nombre, Producto.precio, Producto.tipo, Producto.idDrawable, CASE WHEN userId IS NOT NULL THEN 1 ELSE 0 END as esFavorito FROM Producto Producto LEFT JOIN (SELECT * FROM Favorito WHERE userId = :userId) AS Fav ON Producto.productoId = Fav.productoId WHERE tipo LIKE '%' || :d || '%' OR nombre LIKE '%' || :d ")
+        @Query("SELECT Producto.productoId, Producto.nombre, Producto.precio, Producto.tipo, Producto.img, CASE WHEN userId IS NOT NULL THEN 1 ELSE 0 END as esFavorito FROM Producto Producto LEFT JOIN (SELECT * FROM Favorito WHERE userId = :userId) AS Fav ON Producto.productoId = Fav.productoId WHERE tipo LIKE '%' || :d || '%' OR nombre LIKE '%' || :d ")
         LiveData<List<ProductoFavorito>> buscarFavorito(String d, int userId);
 
         @Insert

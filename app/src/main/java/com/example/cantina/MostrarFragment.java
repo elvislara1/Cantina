@@ -52,7 +52,7 @@ public class MostrarFragment extends Fragment {
         userId = usuario.id;
 
         cantinaViewModel.seleccionado().observe(getViewLifecycleOwner(), producto -> {
-            Glide.with(MostrarFragment.this).load(producto.idDrawable).into(binding.image);
+            Glide.with(MostrarFragment.this).load(producto.img).into(binding.image);
 
             binding.nombre.setText(producto.nombre);
             binding.precio.setText(producto.precio);

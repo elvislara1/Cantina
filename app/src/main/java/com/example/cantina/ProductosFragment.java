@@ -20,11 +20,15 @@ import com.example.cantina.databinding.FragmentProductosBinding;
 import com.example.cantina.databinding.ViewholderProductoBinding;
 import com.example.cantina.model.Producto;
 import com.example.cantina.viewmodel.CantinaViewModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ProductosFragment extends Fragment {
 
+    FirebaseFirestore db;
     private FragmentProductosBinding binding;
     NavController navController;
     CantinaViewModel cantinaViewModel;
@@ -38,7 +42,7 @@ public abstract class ProductosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        db = FirebaseFirestore.getInstance();
         cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
         navController = NavHostFragment.findNavController(requireParentFragment());
 
@@ -51,7 +55,19 @@ public abstract class ProductosFragment extends Fragment {
             navController.navigate(R.id.action_nuevoProductoFragment);
         });
 
-        obtenerProductos().observe(getViewLifecycleOwner(), productos -> productosAdapter.setProductoList(productos));
+        //obtenerProductos().observe(getViewLifecycleOwner(), productos -> productosAdapter.setProductoList(productos));
+        db.collection("productos").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            List<Producto> productos = new ArrayList<>();
+
+            for(QueryDocumentSnapshot qds:queryDocumentSnapshots){
+                String img = qds.getString("img");
+                String nombre = qds.getString("nombre");
+                double precio = qds.getDouble("precio");
+
+                productos.add(new Producto(nombre, precio, img, "nose"));
+            }
+            productosAdapter.setProductoList(productos);
+        });
     }
     abstract LiveData<List<Producto>> obtenerProductos();
 
@@ -72,7 +88,7 @@ public abstract class ProductosFragment extends Fragment {
             holder.binding.nombre.setText(producto.nombre);
             holder.binding.precio.setText(producto.precio);
             Glide.with(ProductosFragment.this)
-                    .load(producto.idDrawable)
+                    .load(producto.img)
                     .into(holder.binding.foto);
 
             holder.binding.add.setOnClickListener(v -> {
