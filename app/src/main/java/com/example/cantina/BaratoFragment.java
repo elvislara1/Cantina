@@ -23,7 +23,7 @@ public class BaratoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //prueba
     public BaratoFragment() {
         // Required empty public constructor
     }
