@@ -4,13 +4,17 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.Exclude;
+
 @Entity
 public class Producto {
     @PrimaryKey(autoGenerate = true)
+    @Exclude
     public int productoId;
 
     public String nombre;
     public double preciod;
+    @Exclude
     public String precio;
     public String img;
     public String tipo;

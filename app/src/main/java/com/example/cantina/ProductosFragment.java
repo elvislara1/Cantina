@@ -62,7 +62,7 @@ public abstract class ProductosFragment extends Fragment {
             for(QueryDocumentSnapshot qds:queryDocumentSnapshots){
                 String img = qds.getString("img");
                 String nombre = qds.getString("nombre");
-                double precio = qds.getDouble("precio");
+                double precio = qds.getDouble("preciod");
                 String categoria = qds.getString("categoria");
 
                 productos.add(new Producto(nombre, precio, img, categoria));

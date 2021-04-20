@@ -30,4 +30,8 @@
             </group>
         </menu>
     </item>
+    <item
+        android:id="@+id/adminFragment"
+        android:icon="@drawable/cerrar_session"
+        android:title="Admin" />
 </menu>
