@@ -96,8 +96,6 @@ public abstract class ProductosFragment extends Fragment {
                 cantinaViewModel.seleccionar(producto);
                 navController.navigate(R.id.action_mostrarFragment);
             });
-
-
         }
 
         @Override

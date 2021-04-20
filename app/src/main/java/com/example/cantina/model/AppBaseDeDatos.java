@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Usuario.class, Producto.class, Favorito.class, Comentario.class, LineaCarrito.class}, version = 2, exportSchema = false)
+@Database(entities = {Usuario.class, Producto.class, Favorito.class, Comentario.class, LineaCarrito.class}, version = 1, exportSchema = false)
 public abstract class AppBaseDeDatos extends RoomDatabase {
 
     static Executor executor = Executors.newSingleThreadExecutor();
