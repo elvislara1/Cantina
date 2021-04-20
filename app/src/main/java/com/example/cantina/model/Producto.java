@@ -1,6 +1,7 @@
 package com.example.cantina.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -14,6 +15,7 @@ public class Producto {
     public String img;
     public String tipo;
 
+    @Ignore
     public Producto(String nombre, double preciod, String img, String tipo) {
         this.nombre = nombre;
         this.preciod = preciod;

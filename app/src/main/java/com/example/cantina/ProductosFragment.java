@@ -63,8 +63,9 @@ public abstract class ProductosFragment extends Fragment {
                 String img = qds.getString("img");
                 String nombre = qds.getString("nombre");
                 double precio = qds.getDouble("precio");
+                String categoria = qds.getString("categoria");
 
-                productos.add(new Producto(nombre, precio, img, "nose"));
+                productos.add(new Producto(nombre, precio, img, categoria));
             }
             productosAdapter.setProductoList(productos);
         });
