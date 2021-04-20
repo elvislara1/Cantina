@@ -18,9 +18,9 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="293dp"
-            android:layout_height="321dp"
+            android:layout_height="260dp"
             android:layout_marginTop="32dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/cantina"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="Usuario"
-            android:text="elvis"
+            android:drawableLeft="@drawable/user1"
             android:textColor="@color/colorGris2"
             android:textColorHint="@color/colorGris2"
             android:inputType="textPersonName"
@@ -49,8 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:text="lara"
-            android:hint="Contraseña"
+            android:hint=" Contraseña"
+
+            android:drawableLeft="@drawable/candado"
             android:textColorHint="@color/colorGris2"
             android:inputType="textPassword"
             android:backgroundTint="@color/colorGris2"
@@ -67,7 +68,7 @@
             android:layout_marginTop="27dp"
             android:background="@drawable/button_rounded_login"
             android:padding="21dp"
-            android:text="Ingresar Sesión"
+            android:text="Iniciar Sesión"
             android:textColor="@color/colorBlanco"
             app:layout_constraintBottom_toTopOf="@+id/irAlRegistro"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,5 +87,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iniciarSesion"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="600dp"
+            android:dra="@drawable/linea"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
