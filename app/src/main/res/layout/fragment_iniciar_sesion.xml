@@ -51,7 +51,7 @@
             android:backgroundTint="@color/colorGris2"
             android:drawableLeft="@drawable/candado"
             android:ems="10"
-            android:hint="lara"
+            android:hint=" lara"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textColorHint="@color/colorGris2"
