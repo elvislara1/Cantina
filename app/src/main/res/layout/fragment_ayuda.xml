@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AyudaFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AyudaFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:ignore="MissingConstraints">
 
-</FrameLayout>
+        <com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:expansion_openOnlyOne="true">
+
+            <!-- PANEL 1 -->
+
+            <com.github.florent37.expansionpanel.ExpansionHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:expansion_layout="@id/expansionLayout1"
+                app:expansion_toggleOnClick="true">
+
+                <!-- HEADER -->
+                <TextView
+                    style="@style/tituloPanel"
+                    android:text="@string/sobre_la_app_header" />
+                <!-- HEADER INDICATOR -->
+
+            </com.github.florent37.expansionpanel.ExpansionHeader>
+
+            <View style="@style/separador"></View>
+
+            <com.github.florent37.expansionpanel.ExpansionLayout
+                android:id="@+id/expansionLayout1"
+                style="@style/contenidoPanel">
+
+                <TextView
+                    style="@style/contenidoTexto"
+                    android:text="@string/sobre_la_app" />
+
+            </com.github.florent37.expansionpanel.ExpansionLayout>
+
+            <!-- PANEL 2 -->
+
+            <com.github.florent37.expansionpanel.ExpansionHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:expansion_layout="@id/expansionLayout2"
+                app:expansion_toggleOnClick="true">
+
+                <!-- HEADER2 -->
+                <TextView
+                    style="@style/tituloPanel"
+                    android:text="@string/funcionalidades_header" />
+                <!-- HEADER INDICATOR2 -->
+
+            </com.github.florent37.expansionpanel.ExpansionHeader>
+
+            <View style="@style/separador" />
+
+            <com.github.florent37.expansionpanel.ExpansionLayout
+                android:id="@+id/expansionLayout2"
+                style="@style/contenidoPanel">
+
+                <TextView
+                    style="@style/contenidoTexto"
+                    android:text="@string/funcionalidades" />
+
+            </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+            <View style="@style/separador"></View>
+
+            <com.github.florent37.expansionpanel.ExpansionLayout
+                android:id="@+id/expansionLayout3"
+                style="@style/contenidoPanel">
+
+                <TextView
+                    style="@style/contenidoTexto"
+                    android:text="@string/detailed_info" />
+
+            </com.github.florent37.expansionpanel.ExpansionLayout>
+
+        </com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
