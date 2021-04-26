@@ -203,4 +203,9 @@
         android:name="com.example.cantina.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/productoDelDiaFragment"
+        android:name="com.example.cantina.ProductoDelDiaFragment"
+        android:label="fragment_producto_del_dia"
+        tools:layout="@layout/fragment_producto_del_dia" />
 </navigation>

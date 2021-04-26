@@ -1,5 +1,34 @@
 <resources>
-    <string name="app_name">Cantina</string>
+    <string name="app_name">ProyectoCantina</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="sobre_la_app_header"> Sobre la app </string>
+
+    <string name="sobre_la_app"> La aplicación es beneficiosa para reducir el tiempo perdido esperando en la
+                                cola enviando los pedidos directamente a la cocina, haciendo pedidos por
+                                adelantado y proporcionando una mayor fluidez de gestión.\n\n
+
+                                Esta aplicación está dirigida para los estudiantes,
+                                profesores y todo el personal que engloba el Instituto Puig Castellar.\n\n
+
+                                Busca, filtra, y añada a sus productos que mas consuma en la sección FAVORITOS.\n\n
+
+                                Con la ayuda de esta aplicación, solo tienes que seguir un proceso
+                                simple e intuitivo para pedir tus productos, sin necesidad de una larga espera.\n\n
+
+                                Comparte tu opinion sobre la APP en la sección Comunidad </string>
+
+    <string name="funcionalidades_header"> Funcionalidades </string>
+    <string name="funcionalidades">  - Añadir los productos a Favoritos\n\n
+                                    - Una comunidad para valorar, productos, app, etc\n\n
+                                    - Buscar y filtrar productos\n\n
+                                    - Hacer una compra rapida\n\n
+                                    - Realizar pedidos </string>
+
+    <string name="detailed_info_header"> Productos Especiales </string>
+    <string name="detailed_info">   - Lunes y Miercoles -> Pannini"'"s \n\n
+                                    - Martes y Jueves -> Bocata de pavo\n\n
+                                    - Viernes -> Bocata vegetal\n\n</string>
 </resources>

@@ -20,6 +20,11 @@
         android:icon="@drawable/ic_baseline_assignment_24"
         android:title="Horarios"/>
 
+    <item
+        android:id="@+id/productoDelDiaFragment"
+        android:icon="@drawable/ic_baseline_today_24"
+        android:title="Producto del dia"/>
+
     <item android:title="General">
         <menu>
             <group android:checkableBehavior="single">
@@ -32,6 +37,6 @@
     </item>
     <item
         android:id="@+id/adminFragment"
-        android:icon="@drawable/cerrar_session"
+        android:icon="@drawable/ic_baseline_admin_panel_settings_24"
         android:title="Admin" />
 </menu>
