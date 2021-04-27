@@ -12,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -57,27 +56,21 @@ public class IniciarSesionFragment extends Fragment {
         binding.iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = binding.username.getText().toString();
+                String email = binding.username.getText().toString();
                 String password = binding.password.getText().toString();
 
-                autenticacionViewModel.iniciarSesion(username, password);
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                navController.navigate(R.id.action_iniciarSesionFragment_to_inicioFragment);
+                            } else {
+                                Toast.makeText(requireContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
-        autenticacionViewModel.estadoDeLaAutenticacion.observe(getViewLifecycleOwner(), new Observer<AutenticacionViewModel.EstadoDeLaAutenticacion>() {
-            @Override
-            public void onChanged(AutenticacionViewModel.EstadoDeLaAutenticacion estadoDeLaAutenticacion) {
-                switch (estadoDeLaAutenticacion){
-                    case AUTENTICADO:
-                        navController.navigate(R.id.action_iniciarSesionFragment_to_inicioFragment);
-                        break;
 
-                    case AUTENTICACION_INVALIDA:
-                        Toast.makeText(getContext(), "CREDENCIALES NO VALIDAS", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
 
         binding.googleSignIn.setOnClickListener(v -> {
             signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
