@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -43,13 +43,13 @@
             android:drawablePadding="5dp"
             android:backgroundTint="@color/colorGris2"
             android:padding="15dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tituloNuevaCuenta"/>
+            app:layout_constraintTop_toBottomOf="@id/foto"/>
 
         <EditText
-            android:id="@+id/biography"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -64,7 +64,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username"/>
+            app:layout_constraintTop_toBottomOf="@id/name"/>
 
         <EditText
             android:id="@+id/password"
@@ -82,7 +82,8 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/biography"/>
+            app:layout_constraintBottom_toTopOf="@+id/registrar"
+            app:layout_constraintTop_toBottomOf="@id/email"/>
 
         <Button
             android:layout_width="match_parent"
@@ -91,21 +92,33 @@
             android:text="REGISTRAR"
             android:background="@drawable/button_rounded_login"
             android:textColor="@color/colorBlanco"
-            android:layout_marginTop="50dp"
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/password" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="122dp"
-            android:layout_height="119dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="28dp"
             android:src="@drawable/cantina"
+            android:layout_marginLeft="280dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/foto"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/user_photo"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tituloNuevaCuenta" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

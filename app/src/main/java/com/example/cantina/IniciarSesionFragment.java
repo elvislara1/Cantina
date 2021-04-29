@@ -12,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -45,37 +44,34 @@ public class IniciarSesionFragment extends Fragment {
         navController = Navigation.findNavController(view);
         mAuth = FirebaseAuth.getInstance();
 
-        binding.irAlRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_iniciarSesionFragment_to_registroFragment);
+        binding.irAlRegistro.setOnClickListener(v -> navController.navigate(R.id.action_iniciarSesionFragment_to_registroFragment));
+
+        binding.iniciarSesion.setOnClickListener(v -> {
+            String email = binding.email.getText().toString();
+            String password = binding.password.getText().toString();
+
+            boolean valid = true;
+
+            if (email.isEmpty()) {
+                binding.email.setError("Required");
+                valid = false;
             }
-        });
-
-
-
-        binding.iniciarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = binding.username.getText().toString();
-                String password = binding.password.getText().toString();
-
-                autenticacionViewModel.iniciarSesion(username, password);
+            if (password.isEmpty()) {
+                binding.password.setError("Required");
+                valid = false;
             }
-        });
 
-        autenticacionViewModel.estadoDeLaAutenticacion.observe(getViewLifecycleOwner(), new Observer<AutenticacionViewModel.EstadoDeLaAutenticacion>() {
-            @Override
-            public void onChanged(AutenticacionViewModel.EstadoDeLaAutenticacion estadoDeLaAutenticacion) {
-                switch (estadoDeLaAutenticacion){
-                    case AUTENTICADO:
-                        navController.navigate(R.id.action_iniciarSesionFragment_to_inicioFragment);
-                        break;
 
-                    case AUTENTICACION_INVALIDA:
-                        Toast.makeText(getContext(), "CREDENCIALES NO VALIDAS", Toast.LENGTH_SHORT).show();
-                        break;
-                }
+
+            if (valid) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                navController.navigate(R.id.action_iniciarSesionFragment_to_inicioFragment);
+                            } else {
+                                Toast.makeText(requireContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
