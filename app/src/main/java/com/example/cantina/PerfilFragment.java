@@ -1,16 +1,15 @@
 package com.example.cantina;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.cantina.databinding.FragmentPerfilBinding;
 import com.example.cantina.model.Usuario;
@@ -36,7 +35,7 @@ public class PerfilFragment extends Fragment {
         autenticacionViewModel.usuarioAutenticado.observe(getViewLifecycleOwner(), new Observer<Usuario>() {
             @Override
             public void onChanged(Usuario usuario) {
-                binding.username.setText(usuario.username);
+                binding.email.setText(usuario.username);
                 binding.biography.setText(usuario.biography);
             }
         });

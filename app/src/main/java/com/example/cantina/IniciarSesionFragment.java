@@ -44,21 +44,24 @@ public class IniciarSesionFragment extends Fragment {
         navController = Navigation.findNavController(view);
         mAuth = FirebaseAuth.getInstance();
 
-        binding.irAlRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_iniciarSesionFragment_to_registroFragment);
+        binding.irAlRegistro.setOnClickListener(v -> navController.navigate(R.id.action_iniciarSesionFragment_to_registroFragment));
+
+        binding.iniciarSesion.setOnClickListener(v -> {
+            String email = binding.email.getText().toString();
+            String password = binding.password.getText().toString();
+
+            boolean valid = true;
+
+            if (email.isEmpty()) {
+                binding.email.setError("Required");
+                valid = false;
             }
-        });
+            if (password.isEmpty()) {
+                binding.password.setError("Required");
+                valid = false;
+            }
 
-
-
-        binding.iniciarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = binding.username.getText().toString();
-                String password = binding.password.getText().toString();
-
+            if (valid) {
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
@@ -69,8 +72,6 @@ public class IniciarSesionFragment extends Fragment {
                         });
             }
         });
-
-
 
         binding.googleSignIn.setOnClickListener(v -> {
             signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
