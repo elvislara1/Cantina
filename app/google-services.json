@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "116891924510",
+    "project_id": "cantina-b1018",
+    "storage_bucket": "cantina-b1018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116891924510:android:3712b3f47e7c11092bd60f",
+        "android_client_info": {
+          "package_name": "com.example.cantina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116891924510-fks5on0ejln7iiem8cn7686ccsb1eh1t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cantina",
+            "certificate_hash": "7debb5ce98df63c575a88d21787e9545c3b2eefa"
+          }
+        },
+        {
+          "client_id": "116891924510-ksgdgghg108g7sbs5o8ksl1cs489oebc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cantina",
+            "certificate_hash": "81e2446367c00741217521bb48329c13f9784350"
+          }
+        },
+        {
+          "client_id": "116891924510-r91174i6a4f77qfvbt7mih5oju27s5h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL3_Jfopkm3-bGEy14lgGH3J7R2oG0mjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116891924510-r91174i6a4f77qfvbt7mih5oju27s5h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
