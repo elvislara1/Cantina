@@ -49,18 +49,21 @@
                 app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
                 app:layout_constraintTop_toBottomOf="@id/searchView"/>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
+            <com.luseen.spacenavigation.SpaceNavigationView
                 android:id="@+id/bottom_nav_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorApp"
-                app:itemIconSize="26dp"
-                app:itemIconTint="@drawable/tab_color"
+                android:layout_height="match_parent"
+                app:space_background_color="@color/colorApp"
+                app:centre_button_color="@color/colorGrisClaro"
+                app:inactive_item_color="@color/colorNotAvailable"
+                app:active_item_color="@color/colorBlanco"
+                app:centre_button_icon="@drawable/add_2"
+                app:space_item_icon_size="28dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/bottom_menu" />
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

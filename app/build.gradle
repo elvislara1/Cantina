@@ -41,6 +41,11 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    //BottomNav
+    implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
+
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.3.1'
     implementation 'androidx.navigation:navigation-ui:2.3.1'

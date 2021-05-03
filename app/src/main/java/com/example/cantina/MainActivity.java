@@ -36,6 +36,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.luseen.spacenavigation.SpaceItem;
+import com.luseen.spacenavigation.SpaceNavigationView;
+import com.luseen.spacenavigation.SpaceOnClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     MenuItem SearchFragmentItem;
     MenuItem FilterFragmentItem;
-
     AutenticacionViewModel autenticacionViewModel;
+    ProductosFragment productosFragment;
+    //FirebaseRecyclerAdapter<Producto, ProductosFragment.ProductosViewHolder> adapter;
+    DatabaseReference mProductRef;
+    private SpaceNavigationView spaceNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +67,58 @@ public class MainActivity extends AppCompatActivity {
         autenticacionViewModel = new ViewModelProvider(this).get(AutenticacionViewModel.class);
         cantinaViewModel = new ViewModelProvider(this).get(CantinaViewModel.class);
 
+        //TODO - SEARCHVIEW
+        //mProductRef = FirebaseDatabase.getInstance().getReference().child("Productos");
+
+
+        //TODO - NAV_BOTTOM_BAR
+        spaceNavigationView = (SpaceNavigationView) findViewById(R.id.bottom_nav_view);
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_baseline_home_24));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_baseline_shopping_cart_24));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_favorite2));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_comunidad));
+
+        spaceNavigationView.shouldShowFullBadgeText(true);
+        spaceNavigationView.setCentreButtonIconColorFilterEnabled(false);
+
         setSupportActionBar(binding.toolbar);
 
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+                Log.d("onCentreButtonClick ", "onCentreButtonClick");
+                spaceNavigationView.shouldShowFullBadgeText(true);
+                navController.navigate(R.id.compraRapidaFragment);
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+                switch (itemIndex) {
+                    case 0:
+                        navController.navigate(R.id.homeFragment);
+                        return;
+                    case 1:
+                        navController.navigate(R.id.carritoFragment);
+                        return;
+                    case 2:
+                        navController.navigate(R.id.favoritoFragment);
+                        return;
+                    case 3:
+                        navController.navigate(R.id.comunidadFragment);
+                        return;
+                    default:
+                        navController.navigate(R.id.homeFragment);
+                }
+                Log.d("onItemClick ", "" + itemIndex + " " + itemName);
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+                Log.d("onItemReselected ", "" + itemIndex + " " + itemName);
+                navController.navigate(R.id.homeFragment);
+            }
+        });
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 // Top-level destinations:
                 R.id.homeFragment
@@ -71,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
         navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)).getNavController();
         NavigationUI.setupWithNavController(binding.navView, navController);
-        NavigationUI.setupWithNavController(binding.bottomNavView, navController);
         NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -124,7 +180,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.registroFragment
                         || destination.getId() == R.id.baratoFragment
                         || destination.getId() == R.id.caroFragment
-                        || destination.getId() == R.id.alfabetFragment) {
+                        || destination.getId() == R.id.alfabetFragment
+                        || destination.getId() == R.id.productoDelDiaFragment) {
                     binding.bottomNavView.setVisibility(View.GONE);
                 } else {
                     binding.bottomNavView.setVisibility(View.VISIBLE);
@@ -147,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.baratoFragment
                         || destination.getId() == R.id.caroFragment
                         || destination.getId() == R.id.alfabetFragment
-                        || destination.getId() == R.id.searchFragment) {
+                        || destination.getId() == R.id.searchFragment
+                        || destination.getId() == R.id.productoDelDiaFragment) {
                     if (SearchFragmentItem != null) SearchFragmentItem.setVisible(false);
                     if (FilterFragmentItem != null) FilterFragmentItem.setVisible(false);
                 } else {
@@ -176,6 +234,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //TODO Buscar producto
+    private void firebaseSearch(String searchText) {
+        //Query query = mProductRef.orderByChild("nombre").startAt(searchText).endAt(searchText +"\uf8ff");
+
+        //FirebaseRecyclerAdapter<Producto, ProductosFragment.ProductosViewHolder> adapter;
     }
 
     ActivityResultLauncher<Intent> signInClient = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
