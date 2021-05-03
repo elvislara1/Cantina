@@ -61,6 +61,8 @@ public class IniciarSesionFragment extends Fragment {
                 valid = false;
             }
 
+
+
             if (valid) {
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
