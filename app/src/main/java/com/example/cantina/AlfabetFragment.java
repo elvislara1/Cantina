@@ -1,14 +1,13 @@
 package com.example.cantina;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.cantina.model.Producto;
-
-import java.util.List;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AlfabetFragment extends ProductosFragment {
     @Override
-    LiveData<List<Producto>> obtenerProductos() {
-        return cantinaViewModel.alfabeticamente();
+    Task<QuerySnapshot> obtenerProductos() {
+        //return cantinaViewModel.alfabeticamente();
+        return db.collection("productos").orderBy("nombre", Query.Direction.ASCENDING).get();
     }
 }

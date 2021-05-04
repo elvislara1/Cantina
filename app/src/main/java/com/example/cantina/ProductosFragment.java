@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,8 +19,10 @@ import com.example.cantina.databinding.FragmentProductosBinding;
 import com.example.cantina.databinding.ViewholderProductoBinding;
 import com.example.cantina.model.Producto;
 import com.example.cantina.viewmodel.CantinaViewModel;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public abstract class ProductosFragment extends Fragment {
     private FragmentProductosBinding binding;
     NavController navController;
     CantinaViewModel cantinaViewModel;
+    private ProductosAdapter productosAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public abstract class ProductosFragment extends Fragment {
         cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
         navController = NavHostFragment.findNavController(requireParentFragment());
 
-        final ProductosAdapter productosAdapter = new ProductosAdapter();
+        productosAdapter = new ProductosAdapter();
 
         binding.recyclerView.setAdapter(productosAdapter);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -56,7 +58,25 @@ public abstract class ProductosFragment extends Fragment {
         });
 
         //obtenerProductos().observe(getViewLifecycleOwner(), productos -> productosAdapter.setProductoList(productos));
-        db.collection("productos").get().addOnSuccessListener(queryDocumentSnapshots -> {
+       obtenerProductos().addOnSuccessListener(queryDocumentSnapshots -> {
+            List<Producto> productos = new ArrayList<>();
+
+            for(QueryDocumentSnapshot qds:queryDocumentSnapshots){
+                String img = qds.getString("img");
+                String nombre = qds.getString("nombre");
+                double precio = qds.getDouble("preciod");
+                String categoria = qds.getString("categoria");
+
+                productos.add(new Producto(nombre, precio, img, categoria));
+            }
+            productosAdapter.setProductoList(productos);
+        });
+
+       cargarProductos();
+    }
+
+    void cargarProductos(){
+        obtenerProductos().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Producto> productos = new ArrayList<>();
 
             for(QueryDocumentSnapshot qds:queryDocumentSnapshots){
@@ -70,11 +90,13 @@ public abstract class ProductosFragment extends Fragment {
             productosAdapter.setProductoList(productos);
         });
     }
-    abstract LiveData<List<Producto>> obtenerProductos();
+
+    abstract Task<QuerySnapshot> obtenerProductos();
 
     class ProductosAdapter extends RecyclerView.Adapter<ProductosViewHolder> {
 
         List<Producto> productoList;
+        private String numberFormatter;
 
         @NonNull
         @Override
@@ -87,7 +109,10 @@ public abstract class ProductosFragment extends Fragment {
             Producto producto = productoList.get(position);
 
             holder.binding.nombre.setText(producto.nombre);
-            holder.binding.precio.setText(producto.precio);
+            String finalresult = String.valueOf(producto.preciod);
+            String formattedValue = numberFormatter.format(finalresult + "€");
+            holder.binding.precio.setText(formattedValue);
+
             Glide.with(ProductosFragment.this)
                     .load(producto.img)
                     .into(holder.binding.foto);

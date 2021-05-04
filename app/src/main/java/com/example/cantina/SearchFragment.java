@@ -1,13 +1,32 @@
 package com.example.cantina;
 
-import androidx.lifecycle.LiveData;
-import com.example.cantina.model.Producto;
+import android.os.Bundle;
+import android.view.View;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class SearchFragment extends ProductosFragment {
+    String ts = "";
     @Override
-    LiveData<List<Producto>> obtenerProductos() {
-        return cantinaViewModel.buscar();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        cantinaViewModel.terminoBusqueda.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                ts = s;
+                cargarProductos();
+            }
+        });
+    }
+
+    @Override
+    Task<QuerySnapshot> obtenerProductos() {
+        return db.collection("productos").whereGreaterThanOrEqualTo("nombre", ts).get();
     }
 }

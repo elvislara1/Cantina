@@ -20,13 +20,13 @@ import java.util.List;
 
 public class CantinaViewModel extends AndroidViewModel {
 
+
     CantinaRepository cantinaRepository;
 
     public MutableLiveData<Uri> imagenSeleccionada = new MutableLiveData<>();
     MutableLiveData<Producto> productoSeleccionado = new MutableLiveData<>();
-    MutableLiveData<String> terminoBusqueda = new MutableLiveData<>();
+    public MutableLiveData<String> terminoBusqueda = new MutableLiveData<>();
     MutableLiveData<List<Comentario>> listComunidadMutableLiveData = new MutableLiveData<>();
-    MutableLiveData<Comentario> comunidadSelecionado = new MutableLiveData<>();
 
     LiveData<List<Producto>> resultadoBusqueda = Transformations.switchMap(terminoBusqueda, new Function<String, LiveData<List<Producto>>>() {
         @Override

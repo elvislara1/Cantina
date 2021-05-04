@@ -67,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
         autenticacionViewModel = new ViewModelProvider(this).get(AutenticacionViewModel.class);
         cantinaViewModel = new ViewModelProvider(this).get(CantinaViewModel.class);
 
-        //TODO - SEARCHVIEW
-        //mProductRef = FirebaseDatabase.getInstance().getReference().child("Productos");
-
 
         //TODO - NAV_BOTTOM_BAR
         spaceNavigationView = (SpaceNavigationView) findViewById(R.id.bottom_nav_view);
@@ -238,9 +235,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO Buscar producto
     private void firebaseSearch(String searchText) {
-        //Query query = mProductRef.orderByChild("nombre").startAt(searchText).endAt(searchText +"\uf8ff");
-
-        //FirebaseRecyclerAdapter<Producto, ProductosFragment.ProductosViewHolder> adapter;
+        cantinaViewModel.establecerTerminoBusqueda(searchText);
     }
 
     ActivityResultLauncher<Intent> signInClient = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {

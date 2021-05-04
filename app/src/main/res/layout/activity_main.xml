@@ -58,7 +58,7 @@
                 app:centre_button_color="@color/colorGrisClaro"
                 app:inactive_item_color="@color/colorNotAvailable"
                 app:active_item_color="@color/colorBlanco"
-                app:centre_button_icon="@drawable/add_2"
+                app:centre_button_icon="@drawable/fire"
                 app:space_item_icon_size="28dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
