@@ -178,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.baratoFragment
                         || destination.getId() == R.id.caroFragment
                         || destination.getId() == R.id.alfabetFragment
-                        || destination.getId() == R.id.productoDelDiaFragment) {
+                        || destination.getId() == R.id.productoDelDiaFragment
+                        || destination.getId() == R.id.compraRapidaFragment){
                     binding.bottomNavView.setVisibility(View.GONE);
                 } else {
                     binding.bottomNavView.setVisibility(View.VISIBLE);
@@ -202,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.caroFragment
                         || destination.getId() == R.id.alfabetFragment
                         || destination.getId() == R.id.searchFragment
+                        || destination.getId() == R.id.compraRapidaFragment
                         || destination.getId() == R.id.productoDelDiaFragment) {
                     if (SearchFragmentItem != null) SearchFragmentItem.setVisible(false);
                     if (FilterFragmentItem != null) FilterFragmentItem.setVisible(false);

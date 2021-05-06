@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/login"
+        android:background="@drawable/login2"
         android:paddingStart="20dp"
         android:paddingEnd="20dp">
 
@@ -26,6 +26,8 @@
             android:textColor="@color/colorApp"
             android:textSize="27dp"
             android:textStyle="bold|italic"
+            android:shadowColor="@color/colorNegro"
+            android:shadowRadius="9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +38,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginLeft="280dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/cantina"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.943"
@@ -62,8 +64,8 @@
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="277dp">
+            app:layout_constraintTop_toBottomOf="@+id/fototriangulo"
+            tools:ignore="MissingConstraints">
 
             <GridLayout
                 android:layout_width="wrap_content"
