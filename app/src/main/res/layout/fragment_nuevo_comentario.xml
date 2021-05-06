@@ -1,48 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="731dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/login34"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     tools:context=".NuevoComentarioFragment">
 
-    <EditText
-        android:id="@+id/nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:textSize="30sp"/>
-    <EditText
-        android:id="@+id/cabecera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Cabecera"
-        app:textAllCaps="true"
-        android:textSize="30sp"/>
-    <EditText
-        android:id="@+id/comentario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Añade un comentario"
-        android:textSize="30sp"/>
+        <EditText
+            android:id="@+id/nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="106dp"
+            android:drawableLeft="@drawable/user1"
+            android:drawablePadding="10dp"
+            android:hint="Nombre"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_marginTop="40dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Cuantas estrellas nos das?"
-        android:textSize="30sp"/>
-    <RatingBar
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"/>
-    <Button
-        android:id="@+id/crear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CREAR"
-        android:textSize="32sp"/>
-</LinearLayout>
+        <EditText
+            android:id="@+id/cabecera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="210dp"
+            android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+            android:drawablePadding="10dp"
+            android:hint="Cabecera"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textAllCaps="true" />
+
+        <EditText
+            android:id="@+id/comentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:drawableLeft="@drawable/ic_baseline_add_comment_24"
+            android:drawablePadding="10dp"
+            android:hint="Añade un comentario"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="320dp"
+            android:hint="Te ha gustado el proceso de compra?"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.312"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="370dp"
+            android:numStars="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/crear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded_login"
+            android:padding="15dp"
+            android:text="ENVIAR"
+            android:textColor="@color/colorBlanco"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.707" />
+</androidx.constraintlayout.widget.ConstraintLayout>
