@@ -62,8 +62,8 @@
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="277dp">
+            app:layout_constraintTop_toBottomOf="@+id/fototriangulo"
+            tools:ignore="MissingConstraints">
 
             <GridLayout
                 android:layout_width="wrap_content"
