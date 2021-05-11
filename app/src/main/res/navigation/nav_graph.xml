@@ -218,4 +218,9 @@
         android:name="com.example.cantina.CompraRapidaFragment"
         android:label="Compra rapida"
         tools:layout="@layout/fragment_compra_rapida" />
+    <fragment
+        android:id="@+id/bollosFragment"
+        android:name="com.example.cantina.BollosFragment"
+        android:label="fragment_bollos"
+        tools:layout="@layout/fragment_bollos" />
 </navigation>

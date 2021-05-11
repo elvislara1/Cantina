@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.cantina.databinding.FragmentAdminBinding;
 import com.example.cantina.model.Producto;
@@ -20,6 +22,7 @@ import java.util.List;
 public class AdminFragment extends Fragment {
     private FragmentAdminBinding binding;
     private FirebaseFirestore db;
+    private NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class AdminFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        navController = Navigation.findNavController(view);
         db = FirebaseFirestore.getInstance();
 
         List<Producto> productList = Arrays.asList(
@@ -56,6 +59,10 @@ public class AdminFragment extends Fragment {
                     db.collection(producto.tipo).document(documentReference.getId()).set(producto);
                 });
             });
+        });
+
+        binding.irAInsertarProducto.setOnClickListener(v -> {
+            navController.navigate(R.id.action_nuevoProductoFragment);
         });
     }
 }

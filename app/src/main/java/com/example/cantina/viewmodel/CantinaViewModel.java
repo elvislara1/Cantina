@@ -49,9 +49,7 @@ public class CantinaViewModel extends AndroidViewModel {
     public LiveData<List<Producto>> obtenerCafes() {
         return cantinaRepository.obtenerCafes();
     }
-    public LiveData<List<Producto>> obtenerBebidas() {
-        return cantinaRepository.obtenerBebidas();
-    }
+    public LiveData<List<Producto>> obtenerBebidas() { return cantinaRepository.obtenerBebidas(); }
     public LiveData<List<Producto>> alfabeticamente() {
         return cantinaRepository.alfabeticamente();
     }

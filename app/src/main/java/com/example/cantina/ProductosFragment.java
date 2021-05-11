@@ -53,9 +53,7 @@ public abstract class ProductosFragment extends Fragment {
         binding.recyclerView.setAdapter(productosAdapter);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        binding.irAInsertarProducto.setOnClickListener(v -> {
-            navController.navigate(R.id.action_nuevoProductoFragment);
-        });
+
 
         //obtenerProductos().observe(getViewLifecycleOwner(), productos -> productosAdapter.setProductoList(productos));
        obtenerProductos().addOnSuccessListener(queryDocumentSnapshots -> {

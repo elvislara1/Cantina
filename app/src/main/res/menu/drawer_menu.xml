@@ -27,9 +27,9 @@
 
     <item android:title="General">
         <menu>
-            <group android:checkableBehavior="single">
+            <group android:checkableBehavior="none">
                 <item
-                    android:id="@+id/cerrarSesion"
+                    android:id="@+id/cerrarSesionFragment"
                     android:icon="@drawable/cerrar_session"
                     android:title="Cerrar Sesion" />
             </group>

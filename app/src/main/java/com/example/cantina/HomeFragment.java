@@ -40,12 +40,14 @@ public class HomeFragment extends Fragment {
                         return new CafeFragment();
                     case 3:
                         return new BebidasFragment();
+                    case 4:
+                        return new BollosFragment();
                 }
             }
 
             @Override
             public int getItemCount() {
-                return 4;
+                return 5;
             }
         });
 
@@ -64,6 +66,9 @@ public class HomeFragment extends Fragment {
                         break;
                     case 3:
                         tab.setText("Bebidas");
+                        break;
+                    case 4:
+                        tab.setText("Bollos");
                         break;
                 }
             }
