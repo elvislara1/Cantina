@@ -74,17 +74,6 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
         executor.execute(()-> {
             dao.insertarProductos(allProducts);
         });
-
-        List<Comentario> comentarios = Arrays.asList(
-                new Comentario("Juan Gabriel Barrio", "FANTÁSTICO", "Los triángulos son la especialidad de la Cantina, sin duda mi elección favorita para la hora del patio.", 4.5f),
-                new Comentario("Martina Orellana", "¡GÉNIAL!", "Buen servicio y bocatas buenísimos. Lo recomiendo 100%", 5f),
-                new Comentario("Elias Pujol", "MAL, MUY MAL", "Poco café y mucha agua,no parece express.", 1f),
-                new Comentario("Rodrigo Almagro", "Bastante bien..", "Está bien, el servicio es rápido", 4f),
-                new Comentario("Maximiliano Canales", "MUCHA COLA", "Las colas del dia jueves son eternas...", 2f)
-        );
-        executor.execute(()-> {
-            dao.comentariosIniciales(comentarios);
-        });
     }
     @Dao
     public interface CantinaDao {
