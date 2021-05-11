@@ -93,7 +93,10 @@ public class CantinaRepository {
         return dao.obtenerComentarios();
     }
 
+    /*
     public void insertarComentario(String usuario, String cabecera, String comentario, Float valoracion) {
         executor.execute(() -> dao.insertarComentario(new Comentario(usuario, cabecera, comentario, valoracion)));
     }
+
+     */
 }

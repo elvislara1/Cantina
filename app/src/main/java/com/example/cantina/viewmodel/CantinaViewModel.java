@@ -123,7 +123,10 @@ public class CantinaViewModel extends AndroidViewModel {
     }
 
     //insertar nuevo producto
+    /*
     public void insertarComentario(String usuario, String cabecera, String comentario, float valoracion) {
         cantinaRepository.insertarComentario(usuario, cabecera, comentario, valoracion);
     }
+
+     */
 }
