@@ -65,11 +65,11 @@ public class CarritoFragment extends Fragment {
 
         binding.recyclerView.setAdapter(carritoAdapter);
 
-        autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
+        //autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
         navController = Navigation.findNavController(view);
 
-        usuario = autenticacionViewModel.usuarioAutenticado.getValue();
-        userId = usuario.id;
+        //usuario = autenticacionViewModel.usuarioAutenticado.getValue();
+        //userId = usuario.id;
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,

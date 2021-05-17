@@ -94,7 +94,7 @@ public abstract class ProductosFragment extends Fragment {
     class ProductosAdapter extends RecyclerView.Adapter<ProductosViewHolder> {
 
         List<Producto> productoList;
-        private String numberFormatter;
+        String numberFormatter;
 
         @NonNull
         @Override
@@ -102,14 +102,13 @@ public abstract class ProductosFragment extends Fragment {
             return new ProductosViewHolder(ViewholderProductoBinding.inflate(getLayoutInflater(), parent, false));
         }
 
+
         @Override
         public void onBindViewHolder(@NonNull ProductosViewHolder holder, int position) {
             Producto producto = productoList.get(position);
 
             holder.binding.nombre.setText(producto.nombre);
-            String finalresult = String.valueOf(producto.preciod);
-            String formattedValue = numberFormatter.format(finalresult + "€");
-            holder.binding.precio.setText(formattedValue);
+            holder.binding.precio.setText(String.valueOf(producto.preciod) + "€");
 
             Glide.with(ProductosFragment.this)
                     .load(producto.img)

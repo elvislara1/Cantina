@@ -19,6 +19,8 @@ import com.example.cantina.model.ProductoFavorito;
 import com.example.cantina.model.Usuario;
 import com.example.cantina.viewmodel.AutenticacionViewModel;
 import com.example.cantina.viewmodel.CantinaViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import es.dmoral.toasty.Toasty;
 
@@ -29,6 +31,7 @@ public class MostrarFragment extends Fragment {
     public CantinaViewModel cantinaViewModel;
     private Usuario usuario;
     private NavController navController;
+    private FirebaseUser user;
 
     private int userId;
     private int productoId;
@@ -47,6 +50,7 @@ public class MostrarFragment extends Fragment {
         cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
         autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
         navController = Navigation.findNavController(view);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         usuario = autenticacionViewModel.usuarioAutenticado.getValue();
         userId = usuario.id;

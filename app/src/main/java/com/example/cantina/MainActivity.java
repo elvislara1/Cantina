@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -215,6 +216,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (SearchFragmentItem != null) SearchFragmentItem.setVisible(true);
                     if (FilterFragmentItem != null) FilterFragmentItem.setVisible(true);
+                }
+
+                if(destination.getId() == R.id.iniciarSesionFragment
+                        || destination.getId() == R.id.registroFragment){
+                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                } else{
+                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 }
             }
         });

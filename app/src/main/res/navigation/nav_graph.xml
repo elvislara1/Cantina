@@ -124,7 +124,7 @@
         android:label="Horarios"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/productosFragment"
+        android:id="@+id/binding.emailductosFragment"
         android:name="com.example.cantina.ProductosFragment"
         android:label="fragment_productos"
         tools:layout="@layout/fragment_productos" />

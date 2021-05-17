@@ -50,7 +50,7 @@ public class AdminFragment extends Fragment {
                 new Producto("Croissant de chocolate", 1, "https://firebasestorage.googleapis.com/v0/b/cantina-b1018.appspot.com/o/choco.png?alt=media&token=fb0006f9-3b74-4f18-b29f-b1fed4a0c963", "bollos"),
                 new Producto("Capuccino", 1.60, "https://firebasestorage.googleapis.com/v0/b/cantina-b1018.appspot.com/o/capuchino.png?alt=media&token=a8a14503-e529-4d84-bc34-a1bdf3ec32b8", "cafes"),
                 new Producto("Cafe con leche", 1.80, "https://firebasestorage.googleapis.com/v0/b/cantina-b1018.appspot.com/o/cafelechee.jpg?alt=media&token=a57db0ee-128c-40e2-93bc-faf333951618", "cafes"),
-                new Producto("Cafe", 1.50, "https://firebasestorage.googleapis.com/v0/b/cantina-b1018.appspot.com/o/triangulo.png?alt=media&token=ab6b7bd7-e116-4a03-8f5a-509c0d8180b0", "cafes")
+                new Producto("Cafe", 1.50, "https://firebasestorage.googleapis.com/v0/b/cantina-b1018.appspot.com/o/cafe.jpg?alt=media&token=77d2e944-eb71-4fd3-b7cd-18ac790d8a78", "cafes")
         );
 
         binding.button.setOnClickListener(v->{
