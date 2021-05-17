@@ -19,6 +19,7 @@ import com.example.cantina.databinding.ViewholderFavoritoBinding;
 import com.example.cantina.model.ProductoFavorito;
 import com.example.cantina.viewmodel.AutenticacionViewModel;
 import com.example.cantina.viewmodel.CantinaViewModel;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class FavoritoFragment extends Fragment {
     AutenticacionViewModel autenticacionViewModel;
     private NavController navController;
     private int userId;
+    private FirebaseUser user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

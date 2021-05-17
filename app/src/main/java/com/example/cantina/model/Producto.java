@@ -5,6 +5,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 @Entity
 public class Producto {
@@ -32,5 +33,8 @@ public class Producto {
         this.precio = precio;
         this.img = img;
         this.tipo = tipo;
+    }
+
+    public Producto(QueryDocumentSnapshot m) {
     }
 }
