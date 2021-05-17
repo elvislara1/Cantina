@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
+    android:background="@drawable/filtro4"
     tools:context=".FilterFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -21,15 +22,18 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonMasBarato"
         app:layout_constraintTop_toTopOf="parent"/>
 
+
+
     <Button
         android:id="@+id/buttonMasBarato"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:textStyle="italic"
+        android:textColor="@color/colorBlanco"
         android:text="Más barato"
         android:padding="10dp"
-        android:background="@drawable/button_rounded_gris"
+        android:background="@drawable/button_rounded_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filtrarText" />
@@ -38,11 +42,12 @@
         android:id="@+id/buttonMasCaro"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/colorBlanco"
         android:text="Más caro"
         android:textStyle="italic"
         android:padding="10dp"
-        android:background="@drawable/button_rounded_gris"
+        android:background="@drawable/button_rounded_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMasBarato" />
@@ -51,11 +56,13 @@
         android:id="@+id/buttonOrdenAlfa"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:text="Alfabéticamente"
         android:padding="10dp"
         android:textStyle="italic"
-        android:background="@drawable/button_rounded_gris"
+        android:textColor="@color/colorBlanco"
+
+        android:background="@drawable/button_rounded_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMasCaro" />

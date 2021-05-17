@@ -9,13 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="90dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/colorGris2"
             android:textStyle="bold"
             android:text="Seleccione una de las opciones"/>
@@ -23,7 +24,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="150dp"
         android:orientation="horizontal">
         <RadioGroup
             android:layout_width="wrap_content"
@@ -35,14 +36,16 @@
                 android:text="Para llevar"
                 android:checked="true"
                 android:textColor="@color/colorGrisOscuro"
-                android:textSize="20dp"/>
+                android:textSize="18dp"/>
             <RadioButton
                 android:id="@+id/comerIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
                 android:textColor="@color/colorGrisOscuro"
                 android:text="Para comer en la cantina"
-                android:textSize="20dp"/>
+                android:textSize="18dp"/>
         </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_canteen"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="32dp"
                 android:layout_gravity="center"/>
         </LinearLayout>
     </LinearLayout>

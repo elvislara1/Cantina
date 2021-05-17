@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -37,6 +40,12 @@ public class SplashFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+       YoYo.with(Techniques.Bounce)
+               .duration(1400)
+               .repeat(6)
+               .playOn(view.findViewById(R.id.cantina));
+
+
         navController = Navigation.findNavController(view);
 
         // esta variable deberia estar en un ViewModel
@@ -56,7 +65,7 @@ public class SplashFragment extends Fragment {
             public void run() {
                 try {
                     // simular la carga de recursos
-                    Thread.sleep(1000);
+                    Thread.sleep(7000);
                     finishedLoading.postValue(true);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -9,21 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="90dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/nombre"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:text="Seleccione el método de pago"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/colorGris2"
-            android:textStyle="bold"
-            android:text="Seleccione el método de pago"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="12dp"
         android:orientation="horizontal">
         <RadioGroup
             android:layout_width="wrap_content"
@@ -33,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tarjeta de crédito"
+                android:checked="true"
                 android:textColor="@color/colorGrisOscuro"
                 android:textSize="20dp"/>
 
@@ -49,7 +53,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGrisOscuro"
-                android:checked="true"
                 android:layout_marginTop="15dp"
                 android:text="Otros"
                 android:textSize="20dp"/>
@@ -97,6 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+
         android:orientation="vertical">
 
         <Button
@@ -109,6 +114,47 @@
             android:textColor="@color/colorBlanco"
             android:textStyle="bold"
             android:background="@drawable/button_rounded_login"
-            android:text="CONFIRMAR"/>
+            android:text="SELECCIONAR"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/recibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorBlanco"
+            android:textStyle="bold"
+            android:background="@drawable/button_rounded_login"
+            android:text="Generar Recibo"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/seleccionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorBlanco"
+            android:textStyle="bold"
+            android:background="@drawable/button_rounded_login"
+            android:text="SELECCIONAR"/>
+
     </LinearLayout>
 </FrameLayout>

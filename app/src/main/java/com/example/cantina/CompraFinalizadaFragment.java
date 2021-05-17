@@ -62,14 +62,6 @@ public class CompraFinalizadaFragment extends Fragment {
         binding.recyclerView.setAdapter(carritoAdapter);
         cantinaViewModel.carrito(userId).observe(getViewLifecycleOwner(), producto -> carritoAdapter.establecerLista(producto));
 
-        //logo textConfirmada textGracias numPedido importante volverAlMenu
-        faltaAceptarLaCompra();
-
-        binding.confirmarCompra.setOnClickListener(view1 -> {
-            compraAceptada();
-            CommonConfetti.rainingConfetti((ViewGroup) view, new int[] { Color.BLUE, Color.YELLOW , Color.RED })
-                    .stream(3000);
-        });
 
         binding.volverAlMenu.setOnClickListener(view1 -> {
             navController.navigate(R.id.action_compraFinalizadaFragment_to_homeFragment);
@@ -78,24 +70,7 @@ public class CompraFinalizadaFragment extends Fragment {
             //cantinaViewModel.carrito(userId).clear();
         });
     }
-    public void faltaAceptarLaCompra(){
-        //logo textConfirmada textGracias numPedido importante volverAlMenu
-        binding.logo.setVisibility(View.GONE);
-        binding.textConfirmada.setVisibility(View.GONE);
-        binding.textGracias.setVisibility(View.GONE);
-        binding.importante.setVisibility(View.GONE);
-        binding.volverAlMenu.setVisibility(View.GONE);
-    }
 
-    public void compraAceptada() {
-        //logo textConfirmada textGracias numPedido importante volverAlMenu
-        binding.logo.setVisibility(View.VISIBLE);
-        binding.textConfirmada.setVisibility(View.VISIBLE);
-        binding.textGracias.setVisibility(View.VISIBLE);
-        binding.importante.setVisibility(View.VISIBLE);
-        binding.volverAlMenu.setVisibility(View.VISIBLE);
-        binding.confirmarCompra.setVisibility(View.GONE);
-    }
     class CarritoAdapter extends  RecyclerView.Adapter<ProductoViewHolder>{
 
         List<ProductoEnCarrito> productoEnCarrito;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -188,6 +188,9 @@
         <action
             android:id="@+id/action_metodoPagoFragment_to_compraFinalizadaFragment"
             app:destination="@id/compraFinalizadaFragment"/>
+        <action
+            android:id="@+id/action_metodoPagoFragment_to_tarjetaCreditoFragment"
+            app:destination="@id/tarjetaCreditoFragment" />
     </fragment>
     <fragment
         android:id="@+id/compraFinalizadaFragment"
@@ -223,4 +226,9 @@
         android:name="com.example.cantina.BollosFragment"
         android:label="fragment_bollos"
         tools:layout="@layout/fragment_bollos" />
+    <fragment
+        android:id="@+id/tarjetaCreditoFragment"
+        android:name="com.example.cantina.TarjetaCreditoFragment"
+        android:label="fragment_tarjeta_credito"
+        tools:layout="@layout/fragment_tarjeta_credito" />
 </navigation>
