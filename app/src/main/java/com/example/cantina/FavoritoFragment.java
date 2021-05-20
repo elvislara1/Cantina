@@ -53,7 +53,7 @@ public class FavoritoFragment extends Fragment {
 
         autenticacionViewModel.usuarioAutenticado.observe(getViewLifecycleOwner(), usuario -> {
             userId = usuario.id;
-
+            /*
             cantinaViewModel.productosFavoritos(usuario.id).observe(getViewLifecycleOwner(), productosList -> {
                 if (productosList == null || productosList.size() == 0) {
                     // Log.e("ZERO", "RESULTS");
@@ -69,6 +69,8 @@ public class FavoritoFragment extends Fragment {
                 }
                 favoritoAdapter.establecerLista(productosList);
             });
+
+             */
         });
 
         binding.recyclerView.setAdapter(favoritoAdapter);

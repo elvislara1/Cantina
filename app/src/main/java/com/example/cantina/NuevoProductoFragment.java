@@ -2,6 +2,10 @@ package com.example.cantina;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,18 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.cantina.databinding.FragmentNuevoProductoBinding;
 import com.example.cantina.viewmodel.CantinaViewModel;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class NuevoProductoFragment extends Fragment {
 
@@ -63,7 +58,7 @@ public class NuevoProductoFragment extends Fragment {
             String precio = binding.precio.getText().toString();
             String tipo = binding.tipo.getText().toString();
 
-            cantinaViewModel.insertarProducto(nombre, precio, imagenSeleccionada.toString(), tipo);
+            //cantinaViewModel.insertarProducto(nombre, precio, imagenSeleccionada.toString(), tipo);
 
             cantinaViewModel.establecerImagenSeleccionada(null);
             navController.popBackStack();
