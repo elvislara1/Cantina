@@ -35,8 +35,19 @@
             </group>
         </menu>
     </item>
-    <item
-        android:id="@+id/adminFragment"
-        android:icon="@drawable/ic_baseline_admin_panel_settings_24"
-        android:title="Admin" />
+    <item android:title="Admin">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/adminFragment"
+                    android:icon="@drawable/ic_baseline_admin_panel_settings_24"
+                    android:title="Gestión de productos" />
+                <item
+                    android:id="@+id/adminComandaFragment"
+                    android:icon="@drawable/ic_baseline_admin_panel_settings_24"
+                    android:title="Gestión de comanda" />
+            </group>
+        </menu>
+    </item>
+
 </menu>

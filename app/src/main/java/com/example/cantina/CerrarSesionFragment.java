@@ -14,27 +14,33 @@ import androidx.navigation.Navigation;
 
 import com.example.cantina.databinding.FragmentCerrarSesionBinding;
 import com.example.cantina.viewmodel.AutenticacionViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CerrarSesionFragment extends Fragment {
 
-    private AutenticacionViewModel autenticacionViewModel;
     private NavController navController;
-    private FragmentCerrarSesionBinding binding;
-
+    FirebaseUser user;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (binding = FragmentCerrarSesionBinding.inflate(inflater, container, false)).getRoot();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_cerrar_sesion, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         navController = Navigation.findNavController(view);
 
-        autenticacionViewModel.cerrarSesion();
+        GoogleSignIn.getClient(requireActivity(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .build()).signOut();
 
-        navController.navigate(R.id.action_cerrarSesionFragment_to_iniciarSesionFragment);
+        FirebaseAuth.getInstance().signOut();
+        System.out.println(user.getDisplayName());
+
+        Navigation.findNavController(view).navigate(R.id.iniciarSesionFragment);
     }
 }

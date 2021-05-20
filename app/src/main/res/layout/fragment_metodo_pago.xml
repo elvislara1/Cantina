@@ -36,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tarjeta de crédito"
-                android:checked="true"
                 android:textColor="@color/colorGrisOscuro"
                 android:textSize="20dp"/>
 
@@ -46,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGrisOscuro"
                 android:layout_marginTop="15dp"
+                android:checked="true"
                 android:text="Dinero en efectivo"
                 android:textSize="20dp"/>
             <RadioButton

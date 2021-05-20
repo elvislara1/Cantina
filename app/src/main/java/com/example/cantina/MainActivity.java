@@ -137,18 +137,12 @@ public class MainActivity extends AppCompatActivity {
         final TextView email = header.findViewById(R.id.emailTextView);
 
         FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                if(user != null){
-                    Glide.with(MainActivity.this)
-                            .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString())
-                            .circleCrop()
-                            .into(photo);
-                    name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-                    email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                }
+
             }
         });
 

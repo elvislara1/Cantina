@@ -22,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class IniciarSesionFragment extends Fragment {
@@ -30,6 +31,7 @@ public class IniciarSesionFragment extends Fragment {
     private AutenticacionViewModel autenticacionViewModel;
     private NavController navController;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,12 +39,22 @@ public class IniciarSesionFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
         navController = Navigation.findNavController(view);
         mAuth = FirebaseAuth.getInstance();
+
+        if(user == null) {
+            System.out.println(
+                    "0"
+            );;
+        }else{
+            System.out.println(user.getDisplayName());
+        }
+
 
         binding.irAlRegistro.setOnClickListener(v -> navController.navigate(R.id.action_iniciarSesionFragment_to_registroFragment));
 

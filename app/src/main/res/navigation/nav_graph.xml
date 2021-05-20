@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
- <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+     <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -185,12 +185,13 @@
         android:name="com.example.cantina.MetodoPagoFragment"
         android:label="fragment_metodo_pago"
         tools:layout="@layout/fragment_metodo_pago" >
-        <action
-            android:id="@+id/action_metodoPagoFragment_to_compraFinalizadaFragment"
-            app:destination="@id/compraFinalizadaFragment"/>
+
         <action
             android:id="@+id/action_metodoPagoFragment_to_tarjetaCreditoFragment"
             app:destination="@id/tarjetaCreditoFragment" />
+        <action
+            android:id="@+id/action_metodoPagoFragment_to_compraPendienteFragment"
+            app:destination="@id/compraPendienteFragment" />
     </fragment>
     <fragment
         android:id="@+id/compraFinalizadaFragment"
@@ -230,5 +231,26 @@
         android:id="@+id/tarjetaCreditoFragment"
         android:name="com.example.cantina.TarjetaCreditoFragment"
         android:label="fragment_tarjeta_credito"
-        tools:layout="@layout/fragment_tarjeta_credito" />
+        tools:layout="@layout/fragment_tarjeta_credito" >
+        <action
+            android:id="@+id/action_tarjetaCreditoFragment_to_compraFinalizadaFragment"
+            app:destination="@id/compraFinalizadaFragment" />
+        <action
+            android:id="@+id/action_tarjetaCreditoFragment_to_metodoPagoFragment"
+            app:destination="@id/metodoPagoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/compraPendienteFragment"
+        android:name="com.example.cantina.CompraPendienteFragment"
+        android:label="fragment_compra_pendiente"
+        tools:layout="@layout/fragment_compra_pendiente" >
+        <action
+            android:id="@+id/action_compraPendienteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminComandaFragment"
+        android:name="com.example.cantina.AdminComandaFragment"
+        android:label="fragment_admin_comanda"
+        tools:layout="@layout/fragment_admin_comanda" />
 </navigation>

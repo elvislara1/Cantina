@@ -83,7 +83,7 @@ public class MetodoPagoFragment extends Fragment {
         });
 
         binding.recibo.setOnClickListener(v -> {
-            navController.navigate(R.id.action_metodoPagoFragment_to_compraFinalizadaFragment);
+            navController.navigate(R.id.action_metodoPagoFragment_to_compraPendienteFragment);
         });
     }
 }
