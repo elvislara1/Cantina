@@ -2,9 +2,6 @@ package com.example.cantina.model;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -17,7 +14,7 @@ public class CantinaRepository {
     public CantinaRepository(Application application) {
         dao = AppBaseDeDatos.getInstance(application).dao();
     }
-
+/*
     public LiveData<List<Producto>> obtenerProductos() {
         return dao.obtenerProductos();
     }
@@ -57,7 +54,8 @@ public class CantinaRepository {
     public void insertarProducto(String nombre, String precio, String portada, String tipo) {
         executor.execute(() -> dao.insertarProducto(new Producto(nombre, precio, portada, tipo)));
     }
-
+    */
+    /*
     public void anadirAlCarrito(int userId, int  productoId) {
         executor.execute(() -> {
             dao.anadirAlCarrito(new LineaCarrito(userId, productoId));
@@ -92,8 +90,6 @@ public class CantinaRepository {
     public LiveData<List<Comentario>> obtenerComunidad() {
         return dao.obtenerComentarios();
     }
-
-    /*
     public void insertarComentario(String usuario, String cabecera, String comentario, Float valoracion) {
         executor.execute(() -> dao.insertarComentario(new Comentario(usuario, cabecera, comentario, valoracion)));
     }

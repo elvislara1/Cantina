@@ -196,7 +196,7 @@
     <fragment
         android:id="@+id/compraFinalizadaFragment"
         android:name="com.example.cantina.CompraFinalizadaFragment"
-        android:label="fragment_compra_finalizada"
+        android:label="Compra confirmada"
         tools:layout="@layout/fragment_compra_finalizada">
         <action
             android:id="@+id/action_compraFinalizadaFragment_to_homeFragment"

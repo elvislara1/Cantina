@@ -1,18 +1,12 @@
 package com.example.cantina.model;
 
-import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-@Entity
 public class Producto {
-    @PrimaryKey(autoGenerate = true)
-    @Exclude
-    public int productoId;
-
+    public String productoId;
     public String nombre;
     public double preciod;
     @Exclude
@@ -21,7 +15,8 @@ public class Producto {
     public String tipo;
 
     @Ignore
-    public Producto(String nombre, double preciod, String img, String tipo) {
+    public Producto(String id, String nombre, double preciod, String img, String tipo) {
+        this.productoId = id;
         this.nombre = nombre;
         this.preciod = preciod;
         this.img = img;
@@ -35,6 +30,11 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public Producto(QueryDocumentSnapshot m) {
+    public Producto(QueryDocumentSnapshot qds) {
+        productoId = qds.getId();
+        this.img = qds.getString("img");
+        this.nombre = qds.getString("nombre");
+        this.preciod = qds.getDouble("preciod");
+        this.tipo = qds.getString("categoria");
     }
 }

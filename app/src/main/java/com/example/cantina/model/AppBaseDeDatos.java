@@ -12,12 +12,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Usuario.class, Producto.class, Favorito.class, Comentario.class, LineaCarrito.class}, version = 2, exportSchema = false)
+@Database(entities = {Usuario.class, Favorito.class, Comentario.class}, version = 2, exportSchema = false)
 public abstract class AppBaseDeDatos extends RoomDatabase {
 
     static Executor executor = Executors.newSingleThreadExecutor();
@@ -36,15 +35,11 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
                                 @Override
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                                     super.onCreate(db);
-                                    insertarDatosIniciales(getInstance(context).dao());
-
                                 }
 
                                 @Override
                                 public void onDestructiveMigration(@NonNull SupportSQLiteDatabase db) {
                                     super.onDestructiveMigration(db);
-                                    insertarDatosIniciales(getInstance(context).dao());
-
                                 }
                             })
                             .build();
@@ -53,29 +48,7 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-    private static void insertarDatosIniciales(CantinaDao dao) {
-        List<Producto> allProducts = Arrays.asList(
-                new Producto("Triangulo", "1€", "file:///android_asset/triangulo.png", "S"),
-                new Producto("Panini","1.30€", "file:///android_asset/panini.jpg","S"),
-                new Producto("Croissant Choco","1€","file:///android_asset/choco.png","S"),
-                new Producto("Bifrutas","1€", "file:///android_asset/bifrutas.png","D"),
-                new Producto("Bocata Tortilla", "1€", "file:///android_asset/tortilla.png","S"),
-                new Producto("Croissant","1€", "file:///android_asset/croissant.jpg","S"),
-                new Producto("Bocata Bacon","1.70€", "file:///android_asset/bacon.png","S"),
-                new Producto("Frankfurt","1.20€", "file:///android_asset/frankf.jpg","S"),
-                new Producto("Agua mineral", "0.75€","file:///android_asset/agua.jpg","D"),
-                new Producto("Zumo Manzana", "0.75€","file:///android_asset/manzana.jpg","D"),
-                new Producto("Café","1.50€", "file:///android_asset/cafe.jpg","C"),
-                new Producto("Cafe con leche","1.80€", "file:///android_asset/cafelechee.jpg","C"),
-                new Producto("Capucchino","1.60€", "file:///android_asset/capuchino.png","C"),
-                new Producto("Té","1.70€","file:///android_asset/te.jpg","C")
-        );
-        executor.execute(()-> {
-            dao.insertarProductos(allProducts);
-        });
-    }
-    @Dao
+        @Dao
     public interface CantinaDao {
         @Insert
         void insertarUsuario(Usuario usuario);
@@ -85,7 +58,7 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
 
         @Query("SELECT * FROM Usuario WHERE username = :nombre")
         Usuario comprobarNombreDisponible(String nombre);
-
+/*
         @Query("SELECT * FROM Producto")
         LiveData<List<Producto>> obtenerProductos();
 
@@ -140,11 +113,11 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
 
         @Query("DELETE FROM Favorito WHERE userId = :userId AND productoId = :productoId")
         void eliminarProductoFavorito(int userId, int productoId);
-
+*/
         //----------------
         //    CARRITO
         //----------------
-        @Insert
+        /*@Insert
         void anadirAlCarrito(LineaCarrito lineaCarrito);
 
         @Query("DELETE FROM LineaCarrito WHERE userId = :userId AND productoId = :productoId")
@@ -157,7 +130,7 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
         //detele
         @Query("DELETE FROM LineaCarrito WHERE userId = :userId")
         void eliminarCarrito(int userId);
-
+        */
         //----------------
         //    COMUNIDAD
         //----------------

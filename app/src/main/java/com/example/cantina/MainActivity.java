@@ -180,7 +180,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.checkoutFragment
                         || destination.getId() == R.id.splashFragment
                         || destination.getId() == R.id.tarjetaCreditoFragment
-                        || destination.getId() == R.id.compraRapidaFragment){
+                        || destination.getId() == R.id.compraRapidaFragment
+                        || destination.getId() == R.id.compraFinalizadaFragment){
                     binding.bottomNavView.setVisibility(View.GONE);
                 } else {
                     binding.bottomNavView.setVisibility(View.VISIBLE);
@@ -212,7 +213,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.checkoutFragment
                         || destination.getId() == R.id.splashFragment
                         || destination.getId() == R.id.tarjetaCreditoFragment
-                        || destination.getId() == R.id.productoDelDiaFragment) {
+                        || destination.getId() == R.id.productoDelDiaFragment
+                        || destination.getId() == R.id.compraFinalizadaFragment) {
                     if (SearchFragmentItem != null) SearchFragmentItem.setVisible(false);
                     if (FilterFragmentItem != null) FilterFragmentItem.setVisible(false);
                 } else {

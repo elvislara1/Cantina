@@ -1,5 +1,6 @@
 package com.example.cantina;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,8 +54,6 @@ public abstract class ProductosFragment extends Fragment {
         binding.recyclerView.setAdapter(productosAdapter);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-
-
         //obtenerProductos().observe(getViewLifecycleOwner(), productos -> productosAdapter.setProductoList(productos));
        obtenerProductos().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Producto> productos = new ArrayList<>();
@@ -65,7 +64,7 @@ public abstract class ProductosFragment extends Fragment {
                 double precio = qds.getDouble("preciod");
                 String categoria = qds.getString("categoria");
 
-                productos.add(new Producto(nombre, precio, img, categoria));
+                productos.add(new Producto(qds.getId(), nombre, precio, img, categoria));
             }
             productosAdapter.setProductoList(productos);
         });
@@ -78,12 +77,7 @@ public abstract class ProductosFragment extends Fragment {
             List<Producto> productos = new ArrayList<>();
 
             for(QueryDocumentSnapshot qds:queryDocumentSnapshots){
-                String img = qds.getString("img");
-                String nombre = qds.getString("nombre");
-                double precio = qds.getDouble("preciod");
-                String categoria = qds.getString("categoria");
-
-                productos.add(new Producto(nombre, precio, img, categoria));
+                productos.add(new Producto(qds));
             }
             productosAdapter.setProductoList(productos);
         });
@@ -94,7 +88,7 @@ public abstract class ProductosFragment extends Fragment {
     class ProductosAdapter extends RecyclerView.Adapter<ProductosViewHolder> {
 
         List<Producto> productoList;
-        String numberFormatter;
+
 
         @NonNull
         @Override
@@ -103,12 +97,13 @@ public abstract class ProductosFragment extends Fragment {
         }
 
 
+        @SuppressLint("DefaultLocale")
         @Override
         public void onBindViewHolder(@NonNull ProductosViewHolder holder, int position) {
             Producto producto = productoList.get(position);
 
             holder.binding.nombre.setText(producto.nombre);
-            holder.binding.precio.setText(String.valueOf(producto.preciod) + "€");
+            holder.binding.precio.setText(String.format("%.2f €", producto.preciod));
 
             Glide.with(ProductosFragment.this)
                     .load(producto.img)

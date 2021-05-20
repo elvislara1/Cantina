@@ -1,15 +1,10 @@
 package com.example.cantina.model;
-import androidx.room.Entity;
-
-@Entity(primaryKeys = {"userId", "productoId"})
+//@Entity(primaryKeys = {"userId", "productoId"})
 public class LineaCarrito {
-    public int userId;
-    public int productoId;
-    public int cantidad;
+    public String userId;
 
-    public LineaCarrito(int userId, int productoId) {
+    public LineaCarrito(String userId) {
         this.userId = userId;
-        this.productoId = productoId;
     }
 
     public LineaCarrito(LineaCarrito lineaCarrito) {

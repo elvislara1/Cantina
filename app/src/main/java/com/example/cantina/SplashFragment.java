@@ -41,8 +41,8 @@ public class SplashFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
        YoYo.with(Techniques.Bounce)
-               .duration(1400)
-               .repeat(6)
+               .duration(700)
+               .repeat(3)
                .playOn(view.findViewById(R.id.cantina));
 
 
