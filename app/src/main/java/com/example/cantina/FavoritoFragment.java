@@ -1,5 +1,6 @@
 package com.example.cantina;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +19,12 @@ import com.example.cantina.databinding.ViewholderFavoritoBinding;
 import com.example.cantina.model.ProductoFavorito;
 import com.example.cantina.viewmodel.AutenticacionViewModel;
 import com.example.cantina.viewmodel.CantinaViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritoFragment extends Fragment {
@@ -29,8 +33,10 @@ public class FavoritoFragment extends Fragment {
     private CantinaViewModel cantinaViewModel;
     AutenticacionViewModel autenticacionViewModel;
     private NavController navController;
-    private int userId;
     private FirebaseUser user;
+    private FirebaseFirestore mDb;
+
+    private List<ProductoFavorito> productoFavorito = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,16 +48,13 @@ public class FavoritoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
-        autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
-
+        mDb = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         navController = NavHostFragment.findNavController(requireParentFragment());
 
         final FavoritoAdapter favoritoAdapter = new FavoritoAdapter();
 
-        //NavController navController = Navigation.findNavController(view);
-
-        autenticacionViewModel.usuarioAutenticado.observe(getViewLifecycleOwner(), usuario -> {
+        /*autenticacionViewModel.usuarioAutenticado.observe(getViewLifecycleOwner(), usuario -> {
             userId = usuario.id;
             /*
             cantinaViewModel.productosFavoritos(usuario.id).observe(getViewLifecycleOwner(), productosList -> {
@@ -70,16 +73,37 @@ public class FavoritoFragment extends Fragment {
                 favoritoAdapter.establecerLista(productosList);
             });
 
-             */
         });
-
+        */
+        binding.eo.setVisibility(View.GONE);
         binding.recyclerView.setAdapter(favoritoAdapter);
-        favoritoAdapter.establecerLista(favoritoAdapter.productoList);
+
+        mDb.collection("favorito").document(user.getUid()).collection("productoFavorito").addSnapshotListener((value, error) -> {
+            for (QueryDocumentSnapshot m : value) {
+                productoFavorito.add(new ProductoFavorito(m));
+            }
+            favoritoAdapter.notifyDataSetChanged();
+            binding.recyclerView.scrollToPosition(productoFavorito.size() - 1);
+            if (productoFavorito.size() < 1) {
+                NoHayFav();
+            }
+        });
+    }
+
+    public void NoHayFav(){
+        binding.img1.setVisibility(View.VISIBLE);
+        binding.text1.setVisibility(View.VISIBLE);
+        binding.text2.setVisibility(View.VISIBLE);
+        binding.text3.setVisibility(View.VISIBLE);
+    }
+    public void Hayfav(){
+        binding.img1.setVisibility(View.GONE);
+        binding.text1.setVisibility(View.GONE);
+        binding.text2.setVisibility(View.GONE);
+        binding.text3.setVisibility(View.GONE);
     }
 
     class FavoritoAdapter extends  RecyclerView.Adapter<ProductoViewHolder>{
-
-        List<ProductoFavorito> productoList;
 
         @NonNull
         @Override
@@ -87,32 +111,28 @@ public class FavoritoFragment extends Fragment {
             return new ProductoViewHolder(ViewholderFavoritoBinding.inflate(getLayoutInflater(), parent, false));
         }
 
+        @SuppressLint("DefaultLocale")
         @Override
         public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-            ProductoFavorito producto = productoList.get(position);
+            ProductoFavorito producto = productoFavorito.get(position);
 
             holder.binding.nombre.setText(producto.nombre);
-            holder.binding.precio.setText(producto.precio);
-
+            holder.binding.precio.setText(String.format("%.2f €", producto.precio));
+            if (productoFavorito.size() >= 1) Hayfav();
             Glide.with(FavoritoFragment.this).load(producto.idDrawable).into(holder.binding.foto);
         }
 
         @Override
         public int getItemCount() {
-            return productoList == null ? 0 : productoList.size();
-        }
-
-        public void establecerLista(List<ProductoFavorito> producto) {
-            this.productoList = producto;
-            notifyDataSetChanged();
+            return productoFavorito == null ? 0 : productoFavorito.size();
         }
 
         public ProductoFavorito obtenerProducto(int posicion) {
-            return productoList.get(posicion);
+            return productoFavorito.get(posicion);
         }
     }
 
-    class ProductoViewHolder extends RecyclerView.ViewHolder {
+    static class ProductoViewHolder extends RecyclerView.ViewHolder {
         ViewholderFavoritoBinding binding;
 
         public ProductoViewHolder(@NonNull ViewholderFavoritoBinding binding) {

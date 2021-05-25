@@ -8,7 +8,7 @@
 
     <EditText
         android:id="@+id/caducidad3"
-        android:layout_width="141dp"
+        android:layout_width="130dp"
         android:layout_height="39dp"
         android:background="@drawable/button_rounded_border_formulario"
         android:drawableStart="@drawable/candado"
@@ -27,7 +27,7 @@
 
     <EditText
         android:id="@+id/caducidad5"
-        android:layout_width="141dp"
+        android:layout_width="130dp"
         android:layout_height="39dp"
         android:background="@drawable/button_rounded_border_formulario"
         android:drawableStart="@drawable/ic_baseline_today_24"
@@ -144,6 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Cód.Seguridad:"
+        android:paddingLeft="11dp"
         app:layout_constraintBottom_toTopOf="@+id/caducidad3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.669"

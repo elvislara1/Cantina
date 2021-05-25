@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cantina.databinding.FragmentCompraFinalizadaBinding;
 import com.example.cantina.databinding.ViewholderCompraFinalizadaBinding;
 import com.example.cantina.model.ProductoEnCarrito;
-import com.example.cantina.viewmodel.CantinaViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,7 +27,6 @@ import java.util.List;
 public class CompraFinalizadaFragment extends Fragment {
 
     FragmentCompraFinalizadaBinding binding;
-    private CantinaViewModel cantinaViewModel;
     private NavController navController;
     private FirebaseUser user;
     private FirebaseFirestore mDb;
@@ -50,7 +47,6 @@ public class CompraFinalizadaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
         mDb = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         navController = Navigation.findNavController(view);
@@ -72,7 +68,6 @@ public class CompraFinalizadaFragment extends Fragment {
             navController.navigate(R.id.action_compraFinalizadaFragment_to_homeFragment);
 
             //cantinaViewModel.eliminarCarrito(userId);
-
             //borrar cararito cuando vuelva
             //cantinaViewModel.carrito(userId).clear();
         });

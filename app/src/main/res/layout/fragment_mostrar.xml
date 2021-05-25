@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="@color/colorBlanco"
     tools:context=".MostrarFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="88dp">
-
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="694dp"
+            android:layout_height="match_parent"
             android:layout_weight="20">
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="wrap_content"
-                android:layout_height="370dp"
+                android:layout_height="320dp"
                 android:layout_gravity="top|center"
                 android:adjustViewBounds="true"
                 android:padding="40dp"
@@ -87,6 +82,7 @@
                 android:layout_height="43dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="150dp"
+                android:layout_marginStart="1dp"
                 android:layout_gravity="center">
 
                 <Button
@@ -96,7 +92,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                     android:textSize="17dp"
-                    android:background="@drawable/button_rounded2"
+                    android:background="@drawable/button_decrement"
                     android:text="—"/>
 
                 <TextView
@@ -115,15 +111,15 @@
                     android:layout_height="40dp"
                     android:text="+"
                     android:textSize="17dp"
+                    android:background="@drawable/button_rounded"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/button_rounded"/>
+                    android:textColor="@color/colorPrimary"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginBottom="70dp"
+                android:layout_marginStart="37dp"
+                android:layout_marginBottom="50dp"
                 android:layout_gravity="bottom">
 
                 <Button
@@ -138,5 +134,4 @@
                     android:textSize="25sp" />
             </LinearLayout>
         </FrameLayout>
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

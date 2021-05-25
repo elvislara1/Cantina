@@ -104,6 +104,9 @@ public class RegistroFragment extends Fragment {
 
             autenticacionViewModel.crearCuentaEIniciarSesion(name, password, email);
         });
+        binding.exit.setOnClickListener(v -> {
+            navController.navigate(R.id.iniciarSesionFragment);
+        });
 
         binding.foto.setOnClickListener(v -> {
             galeria.launch("image/*");

@@ -24,7 +24,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.bumptech.glide.Glide;
 import com.example.cantina.databinding.ActivityMainBinding;
 import com.example.cantina.databinding.DrawerHeaderBinding;
 import com.example.cantina.model.Usuario;
@@ -181,7 +180,10 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.splashFragment
                         || destination.getId() == R.id.tarjetaCreditoFragment
                         || destination.getId() == R.id.compraRapidaFragment
-                        || destination.getId() == R.id.compraFinalizadaFragment){
+                        || destination.getId() == R.id.compraFinalizadaFragment
+                        || destination.getId() == R.id.compraPendienteFragment
+                        || destination.getId() == R.id.mostrarFragment
+                        || destination.getId() == R.id.adminCompraRapidaFragment){
                     binding.bottomNavView.setVisibility(View.GONE);
                 } else {
                     binding.bottomNavView.setVisibility(View.VISIBLE);
@@ -214,7 +216,10 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.splashFragment
                         || destination.getId() == R.id.tarjetaCreditoFragment
                         || destination.getId() == R.id.productoDelDiaFragment
-                        || destination.getId() == R.id.compraFinalizadaFragment) {
+                        || destination.getId() == R.id.compraFinalizadaFragment
+                        || destination.getId() == R.id.compraPendienteFragment
+                        || destination.getId() == R.id.mostrarFragment
+                        || destination.getId() == R.id.adminCompraRapidaFragment) {
                     if (SearchFragmentItem != null) SearchFragmentItem.setVisible(false);
                     if (FilterFragmentItem != null) FilterFragmentItem.setVisible(false);
                 } else {

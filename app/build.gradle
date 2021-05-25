@@ -48,6 +48,8 @@ dependencies {
     implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
 
     implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.firebaseui:firebase-ui-firestore'
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.0'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.3.1'

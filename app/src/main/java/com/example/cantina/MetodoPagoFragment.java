@@ -69,12 +69,13 @@ public class MetodoPagoFragment extends Fragment {
 
         });
         binding.seleccionar.setOnClickListener(v -> {
-            Toasty.warning(getActivity(), "Se ha seleccionado en efectivo.", Toast.LENGTH_LONG).show();
+            Toasty.normal(getActivity(), "Se ha seleccionado en efectivo.", Toast.LENGTH_LONG).show();
             binding.seleccionar.setVisibility(View.GONE);
             binding.recibo.setVisibility(View.VISIBLE);
             binding.siguiente.setVisibility(View.GONE);
         });
 
+        //Pagar con tarjeta
         binding.siguiente.setOnClickListener(v -> {
             navController.navigate(R.id.action_metodoPagoFragment_to_tarjetaCreditoFragment);
             binding.seleccionar.setVisibility(View.GONE);
@@ -82,6 +83,7 @@ public class MetodoPagoFragment extends Fragment {
             binding.siguiente.setVisibility(View.VISIBLE);
         });
 
+        //Pagar en efectivo
         binding.recibo.setOnClickListener(v -> {
             navController.navigate(R.id.action_metodoPagoFragment_to_compraPendienteFragment);
         });

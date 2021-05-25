@@ -46,36 +46,30 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMasVendido"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginTop="12dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/loMasVendido"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
         <TextView
             android:id="@+id/ofertas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:shadowColor="@color/colorNegro"
+            android:shadowRadius="9"
             android:text="OFERTAS"
             android:textAlignment="center"
             android:textColor="@color/colorApp"
             android:textSize="27dp"
             android:textStyle="bold|italic"
-            android:shadowColor="@color/colorNegro"
-            android:shadowRadius="9"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewMasVendido" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewMasVendido"
+            app:layout_constraintVertical_bias="0.253" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewOfertas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/ofertas"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

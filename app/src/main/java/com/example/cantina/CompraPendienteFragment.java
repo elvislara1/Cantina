@@ -1,45 +1,37 @@
 package com.example.cantina;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cantina.databinding.FragmentCompraFinalizadaBinding;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cantina.databinding.FragmentCompraPendienteBinding;
-import com.example.cantina.databinding.FragmentComunidadBinding;
-import com.example.cantina.databinding.ViewholderCompraFinalizadaBinding;
 import com.example.cantina.databinding.ViewholderCompraPendienteBinding;
 import com.example.cantina.model.ProductoEnCarrito;
-import com.example.cantina.model.Usuario;
-import com.example.cantina.viewmodel.AutenticacionViewModel;
-import com.example.cantina.viewmodel.CantinaViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class CompraPendienteFragment extends Fragment {
     FragmentCompraPendienteBinding binding;
-    private CantinaViewModel cantinaViewModel;
     private NavController navController;
-    public AutenticacionViewModel autenticacionViewModel;
-    private Usuario usuario;
-    private int userId;
     private FirebaseFirestore mDb;
     private FirebaseUser user;
+
+    private List<ProductoEnCarrito> productoEnCarrito = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,27 +46,25 @@ public class CompraPendienteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
-        navController = NavHostFragment.findNavController(requireParentFragment());
-
         mDb = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
-        autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
         navController = Navigation.findNavController(view);
 
-        usuario = autenticacionViewModel.usuarioAutenticado.getValue();
-        userId = usuario.id;
-
-        final CompraPendienteFragment.CarritoAdapter carritoAdapter = new CompraPendienteFragment.CarritoAdapter();
+        final CarritoAdapter carritoAdapter = new CarritoAdapter();
 
         binding.recyclerView.setAdapter(carritoAdapter);
-        cantinaViewModel.carrito(userId).observe(getViewLifecycleOwner(), producto -> carritoAdapter.establecerLista(producto));
 
+        mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito").addSnapshotListener((value, error) -> {
+            for (QueryDocumentSnapshot m: value){
+                productoEnCarrito.add(new ProductoEnCarrito(m));
+            }
+            carritoAdapter.notifyDataSetChanged();
+            binding.recyclerView.scrollToPosition(productoEnCarrito.size() - 1);
+        });
 
         binding.volverAlMenu.setOnClickListener(view1 -> {
-            navController.navigate(R.id.action_compraFinalizadaFragment_to_homeFragment);
-            cantinaViewModel.eliminarCarrito(userId);
+            navController.navigate(R.id.action_compraPendienteFragment_to_homeFragment);
+            //cantinaViewModel.eliminarCarrito(userId);
             //borrar cararito cuando vuelva
             //cantinaViewModel.carrito(userId).clear();
         });
@@ -82,32 +72,26 @@ public class CompraPendienteFragment extends Fragment {
 
     class CarritoAdapter extends  RecyclerView.Adapter<ProductoViewHolder>{
 
-        List<ProductoEnCarrito> productoEnCarrito;
-
         @NonNull
         @Override
-        public CompraPendienteFragment.ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new CompraPendienteFragment.ProductoViewHolder(ViewholderCompraPendienteBinding.inflate(getLayoutInflater(), parent, false));
+        public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ProductoViewHolder(ViewholderCompraPendienteBinding.inflate(getLayoutInflater(), parent, false));
         }
 
 
-
+        @SuppressLint("DefaultLocale")
         @Override
-        public void onBindViewHolder(@NonNull CompraPendienteFragment.ProductoViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
             ProductoEnCarrito producto = productoEnCarrito.get(position);
 
             holder.binding.nombre.setText(producto.nombre);
-            holder.binding.precio.setText(producto.precio);
+            holder.binding.precio.setText(String.format("%.2f €", producto.precio));
+            holder.binding.cantidad.setText("x" + producto.cantidad);
         }
 
         @Override
         public int getItemCount() {
             return productoEnCarrito == null ? 0 : productoEnCarrito.size();
-        }
-
-        public void establecerLista(List<ProductoEnCarrito> productoEnCarrito) {
-            this.productoEnCarrito = productoEnCarrito;
-            notifyDataSetChanged();
         }
 
         public ProductoEnCarrito obtenerProducto(int posicion) {
@@ -117,6 +101,7 @@ public class CompraPendienteFragment extends Fragment {
 
     class ProductoViewHolder extends RecyclerView.ViewHolder {
         ViewholderCompraPendienteBinding binding;
+
         public ProductoViewHolder(@NonNull ViewholderCompraPendienteBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

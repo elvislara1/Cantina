@@ -124,7 +124,7 @@
         android:label="Horarios"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/binding.emailductosFragment"
+        android:id="@+id/productosFragment"
         android:name="com.example.cantina.ProductosFragment"
         android:label="fragment_productos"
         tools:layout="@layout/fragment_productos" />
@@ -174,7 +174,7 @@
     <fragment
         android:id="@+id/checkoutFragment"
         android:name="com.example.cantina.CheckoutFragment"
-        android:label="fragment_checkout"
+        android:label="Checkout"
         tools:layout="@layout/fragment_checkout">
         <action
             android:id="@+id/action_checkoutFragment_to_metodoPagoFragment"
@@ -183,7 +183,7 @@
     <fragment
         android:id="@+id/metodoPagoFragment"
         android:name="com.example.cantina.MetodoPagoFragment"
-        android:label="fragment_metodo_pago"
+        android:label="Método de pago"
         tools:layout="@layout/fragment_metodo_pago" >
 
         <action
@@ -205,7 +205,7 @@
     <fragment
         android:id="@+id/adminFragment"
         android:name="com.example.cantina.AdminFragment"
-        android:label="fragment_admin"
+        android:label="Admin"
         tools:layout="@layout/fragment_admin" />
     <fragment
         android:id="@+id/productoDelDiaFragment"
@@ -215,7 +215,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.cantina.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Perfil"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/compraRapidaFragment"
@@ -230,7 +230,7 @@
     <fragment
         android:id="@+id/tarjetaCreditoFragment"
         android:name="com.example.cantina.TarjetaCreditoFragment"
-        android:label="fragment_tarjeta_credito"
+        android:label="Tarjeta de credito"
         tools:layout="@layout/fragment_tarjeta_credito" >
         <action
             android:id="@+id/action_tarjetaCreditoFragment_to_compraFinalizadaFragment"
@@ -242,7 +242,7 @@
     <fragment
         android:id="@+id/compraPendienteFragment"
         android:name="com.example.cantina.CompraPendienteFragment"
-        android:label="fragment_compra_pendiente"
+        android:label="Compra pendiente"
         tools:layout="@layout/fragment_compra_pendiente" >
         <action
             android:id="@+id/action_compraPendienteFragment_to_homeFragment"
@@ -251,6 +251,16 @@
     <fragment
         android:id="@+id/adminComandaFragment"
         android:name="com.example.cantina.AdminComandaFragment"
-        android:label="fragment_admin_comanda"
+        android:label="Gestion de comandas"
         tools:layout="@layout/fragment_admin_comanda" />
+    <fragment
+        android:id="@+id/adminCompraRapidaFragment"
+        android:name="com.example.cantina.AdminCompraRapidaFragment"
+        android:label="Gestion de compra rapida"
+        tools:layout="@layout/fragment_admin_compra_rapida" />
+    <fragment
+        android:id="@+id/loMasVendidoFragment"
+        android:name="com.example.cantina.LoMasVendidoFragment"
+        android:label="Lo mas vendido"
+        tools:layout="@layout/fragment_lo_mas_vendido" />
 </navigation>
