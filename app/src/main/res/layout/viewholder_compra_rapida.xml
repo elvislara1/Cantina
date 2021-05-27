@@ -7,7 +7,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="25dp"
-    android:layout_marginStart="15dp"
+    android:layout_marginStart="50dp"
     android:layout_marginTop="13dp"
     tools:context=".CompraRapidaFragment"
     app:layout_constraintEnd_toEndOf="parent"
@@ -15,7 +15,7 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="321dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
@@ -24,24 +24,24 @@
             android:id="@+id/foto"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:src="@drawable/bacon"
-            android:padding="10dp"
             android:layout_marginStart="2dp"
             android:layout_marginRight="13dp"
             android:background="@drawable/frame_image_view"
+            android:padding="10dp"
+            android:src="@drawable/bacon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <GridLayout
+            android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/info"
             android:columnCount="2"
             android:rowCount="2"
-            app:layout_constraintTop_toBottomOf="@id/foto"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/foto">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
@@ -58,11 +58,11 @@
                     android:padding="3dp"
                     android:text="Triángulo"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="20dp"
                     app:layout_constraintBottom_toTopOf="@id/precio"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textSize="20dp" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/precio"
@@ -71,17 +71,18 @@
                     android:layout_row="0"
                     android:layout_column="0"
                     android:padding="5dp"
-                    android:textSize="18dp"
                     android:text="1€"
                     android:textAlignment="center"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/colorGrisOscuro"
+                    android:textSize="18dp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/nombre"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/nombre" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </GridLayout>
+
         <Button
             android:id="@+id/compra"
             android:layout_width="126dp"
@@ -89,11 +90,11 @@
             android:background="@drawable/button_rounded_buy"
             android:padding="5dp"
             android:text="comprar"
-            android:textSize="16dp"
             android:textColor="@color/colorBlanco"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

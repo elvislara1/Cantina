@@ -75,7 +75,6 @@ public class FavoritoFragment extends Fragment {
 
         });
         */
-        binding.eo.setVisibility(View.GONE);
         binding.recyclerView.setAdapter(favoritoAdapter);
 
         mDb.collection("favorito").document(user.getUid()).collection("productoFavorito").addSnapshotListener((value, error) -> {
@@ -95,12 +94,14 @@ public class FavoritoFragment extends Fragment {
         binding.text1.setVisibility(View.VISIBLE);
         binding.text2.setVisibility(View.VISIBLE);
         binding.text3.setVisibility(View.VISIBLE);
+        binding.favorito.setVisibility(View.GONE);
     }
     public void Hayfav(){
         binding.img1.setVisibility(View.GONE);
         binding.text1.setVisibility(View.GONE);
         binding.text2.setVisibility(View.GONE);
         binding.text3.setVisibility(View.GONE);
+        binding.favorito.setVisibility(View.VISIBLE);
     }
 
     class FavoritoAdapter extends  RecyclerView.Adapter<ProductoViewHolder>{
