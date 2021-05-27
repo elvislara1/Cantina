@@ -20,13 +20,10 @@ import com.bumptech.glide.Glide;
 import com.example.cantina.databinding.FragmentCarritoBinding;
 import com.example.cantina.databinding.ViewholderCarritoBinding;
 import com.example.cantina.model.ProductoEnCarrito;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -39,9 +36,9 @@ public class CarritoFragment extends Fragment {
     FragmentCarritoBinding binding;
     private NavController navController;
     private FirebaseUser user;
-    private FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-    private CollectionReference ref = mDb.collection("carrito");
-    private CarritoAdapter carritoAdapter;
+    private FirebaseFirestore mDb;
+    DocumentSnapshot ds;
+
     private List<ProductoEnCarrito> productoEnCarrito = new ArrayList<>();
 
     @Override
@@ -58,16 +55,11 @@ public class CarritoFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         navController = NavHostFragment.findNavController(requireParentFragment());
 
+        final CarritoAdapter carritoAdapter = new CarritoAdapter();
+
         carritoConProdutos();
 
-        Query query = ref.document(user.getUid()).collection("productoEnCarrito");
-
-        FirestoreRecyclerOptions<ProductoEnCarrito> options = new FirestoreRecyclerOptions.Builder<ProductoEnCarrito>()
-                .setQuery(query, ProductoEnCarrito.class)
-                .build();
-
-        carritoAdapter = new CarritoAdapter(options);
-
+        //NavController navController = Navigation.findNavController(view);
         binding.volver.setOnClickListener(v -> {
             navController.popBackStack();
         });
@@ -77,7 +69,12 @@ public class CarritoFragment extends Fragment {
         });
 
         binding.recyclerView.setAdapter(carritoAdapter);
+
+        //autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
         navController = Navigation.findNavController(view);
+
+        //usuario = autenticacionViewModel.usuarioAutenticado.getValue();
+        //userId = usuario.id;
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
@@ -90,15 +87,22 @@ public class CarritoFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                //int posicion = viewHolder.getAdapterPosition();
-                carritoAdapter.deleteItem(viewHolder.getAdapterPosition());
-                Toasty.info(getActivity(), "Producto eliminado", Toast.LENGTH_LONG).show();
+                int posicion = viewHolder.getAdapterPosition();
                 //ProductoEnCarrito producto = carritoAdapter.obtenerProducto(posicion);
-
+                //carritoAdapter.removeItem(posicion);
+                mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito").document(String.valueOf(productoEnCarrito.get(posicion))).delete();
+                carritoAdapter.removeItem(posicion);
+                carritoAdapter.notifyDataSetChanged();
+                //carritoAdapter.notifyDataSetChanged();
+                System.out.println(posicion);
+                Toasty.info(getActivity(), "Producto eliminado", Toast.LENGTH_LONG).show();
+                if (productoEnCarrito.size() < 1) {
+                    carritoVacio();
+                }
             }
         }).attachToRecyclerView(binding.recyclerView);
 
-        System.out.println(productoEnCarrito);
+        productoEnCarrito.clear();
         mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito").addSnapshotListener((value, error) -> {
             for (QueryDocumentSnapshot m: value){
                 productoEnCarrito.add(new ProductoEnCarrito(m));
@@ -107,17 +111,9 @@ public class CarritoFragment extends Fragment {
             binding.recyclerView.scrollToPosition(productoEnCarrito.size() - 1);
         });
 
-       //cantinaViewModel.carrito(userId).observe(getViewLifecycleOwner(), producto -> carritoAdapter.establecerLista(producto));
+        //cantinaViewModel.carrito(userId).observe(getViewLifecycleOwner(), producto -> carritoAdapter.establecerLista(producto));
     }
 
-    private void setUpRecyclerView() {
-        Query query = ref.document(user.getUid()).collection("productoEnCarrito");
-
-        FirestoreRecyclerOptions<ProductoEnCarrito> options = new FirestoreRecyclerOptions.Builder<ProductoEnCarrito>()
-                .setQuery(query, ProductoEnCarrito.class)
-                .build();
-        carritoAdapter = new CarritoAdapter(options);
-    }
     public void carritoVacio(){
         binding.img.setVisibility(View.VISIBLE);
         binding.text1.setVisibility(View.VISIBLE);
@@ -133,11 +129,7 @@ public class CarritoFragment extends Fragment {
         binding.checkout.setVisibility(View.VISIBLE);
     }
 
-    public class CarritoAdapter extends FirestoreRecyclerAdapter<ProductoEnCarrito, ProductoViewHolder>{
-
-        public CarritoAdapter(@NonNull FirestoreRecyclerOptions<ProductoEnCarrito> options) {
-            super(options);
-        }
+    class CarritoAdapter extends RecyclerView.Adapter<ProductoViewHolder>{
 
         @NonNull
         @Override
@@ -147,12 +139,15 @@ public class CarritoFragment extends Fragment {
 
         @SuppressLint("DefaultLocale")
         @Override
-        protected void onBindViewHolder(@NonNull ProductoViewHolder holder, int position, @NonNull ProductoEnCarrito producto) {
+        public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
+            ProductoEnCarrito producto = productoEnCarrito.get(position);
+
             holder.binding.nombre.setText(producto.nombre);
             holder.binding.precio.setText(String.format("%.2f €", producto.precio));
             holder.binding.cantidad.setText("x" + producto.cantidad);
             if (productoEnCarrito.size() >= 1) carritoConProdutos();
             Glide.with(CarritoFragment.this).load(producto.idDrawable).into(holder.binding.imagen);
+            holder.itemView.setTag(producto.productoId);
         }
 
         @Override
@@ -160,8 +155,12 @@ public class CarritoFragment extends Fragment {
             return productoEnCarrito == null ? 0 : productoEnCarrito.size();
         }
 
-        public void deleteItem(int position) {
-            getSnapshots().getSnapshot(position).getReference().delete();
+        public void removeItem(int position) {
+            productoEnCarrito.remove(position);
+            // notify the item removed by position
+            // to perform recycler view delete animations
+            // NOTE: don't call notifyDataSetChanged()
+            notifyItemRemoved(position);
         }
 
         public ProductoEnCarrito obtenerProducto(int posicion) {

@@ -210,7 +210,7 @@
     <fragment
         android:id="@+id/productoDelDiaFragment"
         android:name="com.example.cantina.ProductoDelDiaFragment"
-        android:label="fragment_producto_del_dia"
+        android:label="Producto del dia"
         tools:layout="@layout/fragment_producto_del_dia" />
     <fragment
         android:id="@+id/profileFragment"

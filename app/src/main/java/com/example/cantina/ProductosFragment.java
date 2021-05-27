@@ -66,6 +66,7 @@ public abstract class ProductosFragment extends Fragment {
 
                 productos.add(new Producto(qds.getId(), nombre, precio, img, categoria));
             }
+
             productosAdapter.setProductoList(productos);
         });
 

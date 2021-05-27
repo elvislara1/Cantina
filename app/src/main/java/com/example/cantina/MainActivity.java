@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         autenticacionViewModel = new ViewModelProvider(this).get(AutenticacionViewModel.class);
         cantinaViewModel = new ViewModelProvider(this).get(CantinaViewModel.class);
 
-
         //TODO - NAV_BOTTOM_BAR
         spaceNavigationView = (SpaceNavigationView) findViewById(R.id.bottom_nav_view);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
@@ -116,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.homeFragment);
             }
         });
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 // Top-level destinations:
                 R.id.homeFragment
@@ -141,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
             }
         });
 
@@ -153,7 +152,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (destination.getId() == R.id.iniciarSesionFragment
                         || destination.getId() == R.id.registroFragment
-                        || destination.getId() == R.id.splashFragment) {
+                        || destination.getId() == R.id.splashFragment
+                        || destination.getId() == R.id.carritoFragment
+                        || destination.getId() == R.id.favoritoFragment
+                        || destination.getId() == R.id.comunidadFragment) {
                     binding.toolbar.setVisibility(View.GONE);
                     binding.navView.setVisibility(View.GONE);
                     binding.bottomNavView.setVisibility(View.GONE);
