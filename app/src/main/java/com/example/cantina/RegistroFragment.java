@@ -2,6 +2,7 @@ package com.example.cantina;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,6 @@ import com.example.cantina.viewmodel.AutenticacionViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
-
-import java.util.UUID;
 
 public class RegistroFragment extends Fragment {
 
@@ -74,6 +73,12 @@ public class RegistroFragment extends Fragment {
                 binding.name.setError("Required");
                 valid = false;
             }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                binding.email.setError("Por favor, introduzca una dirección de e-mail válida");
+                valid = false;
+            }
+
             if (viewModel.fotoUri == null) {
                 Toast.makeText(requireContext(), "Seleccione una foto", Toast.LENGTH_SHORT).show();
                 valid = false;
@@ -84,7 +89,8 @@ public class RegistroFragment extends Fragment {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 FirebaseStorage.getInstance()
-                                        .getReference("avatars/" + UUID.randomUUID())
+                                        .getReference("usuarios" )
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .putFile(viewModel.fotoUri)
                                         .continueWithTask(task2 -> task2.getResult().getStorage().getDownloadUrl())
                                         .addOnSuccessListener(url -> {

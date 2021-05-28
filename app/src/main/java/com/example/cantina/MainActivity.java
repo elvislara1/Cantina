@@ -24,6 +24,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.example.cantina.databinding.ActivityMainBinding;
 import com.example.cantina.databinding.DrawerHeaderBinding;
 import com.example.cantina.model.Usuario;
@@ -36,7 +37,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
     MenuItem SearchFragmentItem;
     MenuItem FilterFragmentItem;
     AutenticacionViewModel autenticacionViewModel;
-    ProductosFragment productosFragment;
-    //FirebaseRecyclerAdapter<Producto, ProductosFragment.ProductosViewHolder> adapter;
-    DatabaseReference mProductRef;
+    FirebaseUser user;
+
     private SpaceNavigationView spaceNavigationView;
 
     @Override
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView((binding = ActivityMainBinding.inflate(getLayoutInflater())).getRoot());
 
         signInClient.launch(GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         drawerHeaderBinding = DrawerHeaderBinding.bind(binding.navView.getHeaderView(0));
         autenticacionViewModel = new ViewModelProvider(this).get(AutenticacionViewModel.class);
@@ -77,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         spaceNavigationView.shouldShowFullBadgeText(true);
         spaceNavigationView.setCentreButtonIconColorFilterEnabled(false);
+
+        FirebaseUser currentUser =  FirebaseAuth.getInstance().getCurrentUser();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu menuNav = navigationView.getMenu();
+
+
 
         setSupportActionBar(binding.toolbar);
 
@@ -127,20 +133,30 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        /* Load user info in drawer header*/
         View header = navigationView.getHeaderView(0);
         final ImageView photo = header.findViewById(R.id.photoImageView);
         final TextView name = header.findViewById(R.id.displayNameTextView);
         final TextView email = header.findViewById(R.id.emailTextView);
 
         FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                if(user != null){
+                    Glide.with(MainActivity.this)
+                            .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString())
+                            .circleCrop()
+                            .into(photo);
+                    name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                    email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+                    if (user.getEmail().equals("elvislara@gmail.com")){
+                        menuNav.findItem(R.id.admin).setVisible(true);
+                    } else {
+                        menuNav.findItem(R.id.admin).setVisible(false);
+                    }
+                }
             }
         });
 
@@ -185,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.compraFinalizadaFragment
                         || destination.getId() == R.id.compraPendienteFragment
                         || destination.getId() == R.id.mostrarFragment
-                        || destination.getId() == R.id.adminCompraRapidaFragment){
+                        || destination.getId() == R.id.adminCompraRapidaFragment
+                        || destination.getId() == R.id.adminComandaFragment){
                     binding.bottomNavView.setVisibility(View.GONE);
                 } else {
                     binding.bottomNavView.setVisibility(View.VISIBLE);
@@ -221,7 +238,8 @@ public class MainActivity extends AppCompatActivity {
                         || destination.getId() == R.id.compraFinalizadaFragment
                         || destination.getId() == R.id.compraPendienteFragment
                         || destination.getId() == R.id.mostrarFragment
-                        || destination.getId() == R.id.adminCompraRapidaFragment) {
+                        || destination.getId() == R.id.adminCompraRapidaFragment
+                        || destination.getId() == R.id.adminComandaFragment) {
                     if (SearchFragmentItem != null) SearchFragmentItem.setVisible(false);
                     if (FilterFragmentItem != null) FilterFragmentItem.setVisible(false);
                 } else {
@@ -259,7 +277,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //TODO Buscar producto
+
+    private void reload() { }
+
+    //Buscar producto
     private void firebaseSearch(String searchText) {
         cantinaViewModel.establecerTerminoBusqueda(searchText);
     }

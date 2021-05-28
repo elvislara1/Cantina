@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,8 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cantina.databinding.FragmentFavoritoBinding;
 import com.example.cantina.databinding.ViewholderFavoritoBinding;
-import com.example.cantina.model.ProductoFavorito;
-import com.example.cantina.viewmodel.AutenticacionViewModel;
+import com.example.cantina.model.Producto;
 import com.example.cantina.viewmodel.CantinaViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,12 +31,11 @@ public class FavoritoFragment extends Fragment {
 
     FragmentFavoritoBinding binding;
     private CantinaViewModel cantinaViewModel;
-    AutenticacionViewModel autenticacionViewModel;
     private NavController navController;
     private FirebaseUser user;
     private FirebaseFirestore mDb;
 
-    private List<ProductoFavorito> productoFavorito = new ArrayList<>();
+    private List<Producto> productoFavorito = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,38 +50,25 @@ public class FavoritoFragment extends Fragment {
         mDb = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         navController = NavHostFragment.findNavController(requireParentFragment());
+        cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
 
         final FavoritoAdapter favoritoAdapter = new FavoritoAdapter();
 
-        /*autenticacionViewModel.usuarioAutenticado.observe(getViewLifecycleOwner(), usuario -> {
-            userId = usuario.id;
-            /*
-            cantinaViewModel.productosFavoritos(usuario.id).observe(getViewLifecycleOwner(), productosList -> {
-                if (productosList == null || productosList.size() == 0) {
-                    // Log.e("ZERO", "RESULTS");
-                    binding.img1.setVisibility(View.VISIBLE);
-                    binding.text1.setVisibility(View.VISIBLE);
-                    binding.text2.setVisibility(View.VISIBLE);
-                    binding.text3.setVisibility(View.VISIBLE);
-                } else {
-                    binding.img1.setVisibility(View.GONE);
-                    binding.text1.setVisibility(View.GONE);
-                    binding.text2.setVisibility(View.GONE);
-                    binding.text3.setVisibility(View.GONE);
-                }
-                favoritoAdapter.establecerLista(productosList);
-            });
-
-        });
-        */
         binding.recyclerView.setAdapter(favoritoAdapter);
 
+        productoFavorito.clear();
         mDb.collection("favorito").document(user.getUid()).collection("productoFavorito").addSnapshotListener((value, error) -> {
-            for (QueryDocumentSnapshot m : value) {
-                productoFavorito.add(new ProductoFavorito(m));
+            for(QueryDocumentSnapshot qds : value){
+                String id = qds.getId();
+                id = qds.getString("productoId");
+                String img = qds.getString("idDrawable");
+                String nombre = qds.getString("nombre");
+                double precio = qds.getDouble("precio");
+
+                productoFavorito.add(new Producto(id, nombre, img, precio));
             }
             favoritoAdapter.notifyDataSetChanged();
-            binding.recyclerView.scrollToPosition(productoFavorito.size() - 1);
+            binding.recyclerView.scrollToPosition(productoFavorito.size() + 3);
             if (productoFavorito.size() < 1) {
                 NoHayFav();
             }
@@ -115,21 +101,24 @@ public class FavoritoFragment extends Fragment {
         @SuppressLint("DefaultLocale")
         @Override
         public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-            ProductoFavorito producto = productoFavorito.get(position);
+            Producto producto = productoFavorito.get(position);
 
             holder.binding.nombre.setText(producto.nombre);
-            holder.binding.precio.setText(String.format("%.2f €", producto.precio));
+            holder.binding.precio.setText(String.format("%.2f €", producto.preciod));
             if (productoFavorito.size() >= 1) Hayfav();
-            Glide.with(FavoritoFragment.this).load(producto.idDrawable).into(holder.binding.foto);
+            System.out.println(producto.preciod);
+            System.out.println(producto.precio);
+            Glide.with(FavoritoFragment.this).load(producto.img).into(holder.binding.foto);
+
+            holder.binding.add.setOnClickListener(v -> {
+                cantinaViewModel.seleccionar(producto);
+                navController.navigate(R.id.action_mostrarFragment);
+            });
         }
 
         @Override
         public int getItemCount() {
             return productoFavorito == null ? 0 : productoFavorito.size();
-        }
-
-        public ProductoFavorito obtenerProducto(int posicion) {
-            return productoFavorito.get(posicion);
         }
     }
 

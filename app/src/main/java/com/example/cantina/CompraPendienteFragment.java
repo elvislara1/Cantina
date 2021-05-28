@@ -64,6 +64,12 @@ public class CompraPendienteFragment extends Fragment {
 
         binding.volverAlMenu.setOnClickListener(view1 -> {
             navController.navigate(R.id.action_compraPendienteFragment_to_homeFragment);
+
+            productoEnCarrito.forEach(producto -> {
+                mDb.collection("enEspera").document().collection("compraPendiente").add(producto).addOnSuccessListener(documentReference -> {
+                    mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito").document().delete();
+                });
+            });
             //cantinaViewModel.eliminarCarrito(userId);
             //borrar cararito cuando vuelva
             //cantinaViewModel.carrito(userId).clear();
@@ -84,7 +90,7 @@ public class CompraPendienteFragment extends Fragment {
         public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
             ProductoEnCarrito producto = productoEnCarrito.get(position);
 
-            holder.binding.nombre.setText(producto.nombre);
+            holder.binding.nombre.setText(producto.nombre + "\n");
             holder.binding.precio.setText(String.format("%.2f €", producto.precio));
             holder.binding.cantidad.setText("x" + producto.cantidad);
         }

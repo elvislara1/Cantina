@@ -45,8 +45,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMasVendido"
-            android:layout_width="40dp"
-            android:layout_height="241dp"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginTop="12dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,17 +70,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerViewMasVendido"
             app:layout_constraintVertical_bias="0.147" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerTuUltimaCompra"
-            android:layout_width="43dp"
-            android:layout_height="198dp"
-            android:layout_marginBottom="40dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

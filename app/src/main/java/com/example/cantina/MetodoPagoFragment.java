@@ -10,17 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.cantina.databinding.FragmentMetodoPagoBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import es.dmoral.toasty.Toasty;
 
 public class MetodoPagoFragment extends Fragment {
     FragmentMetodoPagoBinding binding;
     private NavController navController;
+    private FirebaseUser user;
+    private FirebaseFirestore mDb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +44,9 @@ public class MetodoPagoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = NavHostFragment.findNavController(requireParentFragment());
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        navController = Navigation.findNavController(view);
+
         binding.recibo.setVisibility(View.GONE);
         binding.siguiente.setVisibility(View.GONE);
 
@@ -69,6 +78,10 @@ public class MetodoPagoFragment extends Fragment {
 
         });
         binding.seleccionar.setOnClickListener(v -> {
+            YoYo.with(Techniques.SlideInRight)
+                    .duration(1200)
+                    .repeat(0)
+                    .playOn(view.findViewById(R.id.recibo));
             Toasty.normal(getActivity(), "Se ha seleccionado en efectivo.", Toast.LENGTH_LONG).show();
             binding.seleccionar.setVisibility(View.GONE);
             binding.recibo.setVisibility(View.VISIBLE);

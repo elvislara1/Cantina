@@ -35,7 +35,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="Admin">
+    <item android:title="Admin" android:id="@+id/admin" android:enabled="false">
         <menu>
             <group android:checkableBehavior="none">
                 <item

@@ -57,9 +57,8 @@ public class CarritoFragment extends Fragment {
 
         final CarritoAdapter carritoAdapter = new CarritoAdapter();
 
-        carritoConProdutos();
+        carritoVacio();
 
-        //NavController navController = Navigation.findNavController(view);
         binding.volver.setOnClickListener(v -> {
             navController.popBackStack();
         });
@@ -69,12 +68,7 @@ public class CarritoFragment extends Fragment {
         });
 
         binding.recyclerView.setAdapter(carritoAdapter);
-
-        //autenticacionViewModel = new ViewModelProvider(requireActivity()).get(AutenticacionViewModel.class);
         navController = Navigation.findNavController(view);
-
-        //usuario = autenticacionViewModel.usuarioAutenticado.getValue();
-        //userId = usuario.id;
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
@@ -88,13 +82,12 @@ public class CarritoFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int posicion = viewHolder.getAdapterPosition();
-                //ProductoEnCarrito producto = carritoAdapter.obtenerProducto(posicion);
-                //carritoAdapter.removeItem(posicion);
-                mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito").document(String.valueOf(productoEnCarrito.get(posicion))).delete();
+
+                mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito").document(productoEnCarrito.get(posicion).productoId).delete();
                 carritoAdapter.removeItem(posicion);
                 carritoAdapter.notifyDataSetChanged();
-                //carritoAdapter.notifyDataSetChanged();
-                System.out.println(posicion);
+
+                productoEnCarrito.clear();
                 Toasty.info(getActivity(), "Producto eliminado", Toast.LENGTH_LONG).show();
                 if (productoEnCarrito.size() < 1) {
                     carritoVacio();
@@ -110,8 +103,6 @@ public class CarritoFragment extends Fragment {
             carritoAdapter.notifyDataSetChanged();
             binding.recyclerView.scrollToPosition(productoEnCarrito.size() - 1);
         });
-
-        //cantinaViewModel.carrito(userId).observe(getViewLifecycleOwner(), producto -> carritoAdapter.establecerLista(producto));
     }
 
     public void carritoVacio(){
@@ -161,10 +152,6 @@ public class CarritoFragment extends Fragment {
             // to perform recycler view delete animations
             // NOTE: don't call notifyDataSetChanged()
             notifyItemRemoved(position);
-        }
-
-        public ProductoEnCarrito obtenerProducto(int posicion) {
-            return productoEnCarrito.get(posicion);
         }
     }
 

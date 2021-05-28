@@ -1,6 +1,9 @@
 package com.example.cantina;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,16 +14,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
-import com.example.cantina.databinding.FragmentAdminBinding;
 import com.example.cantina.databinding.FragmentAdminComandaBinding;
 import com.example.cantina.databinding.ViewholderAdminComandaBinding;
-import com.example.cantina.databinding.ViewholderComunidadBinding;
-import com.example.cantina.model.Comentario;
+import com.example.cantina.model.CompraEnEspera;
 import com.example.cantina.viewmodel.CantinaViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,13 +35,11 @@ public class AdminComandaFragment extends Fragment {
     private NavController navController;
     private FirebaseUser user;
 
-    private List<Comentario> comentarios = new ArrayList<>();
-
-    private AdminComandaFragment.AdminComandaAdapter adminComandaAdapter;
+    private List<CompraEnEspera> compraEnEspera = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_admin_comanda, container, false);
+        return (binding = FragmentAdminComandaBinding.inflate(inflater, container, false)).getRoot();
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -56,21 +50,20 @@ public class AdminComandaFragment extends Fragment {
         cantinaViewModel = new ViewModelProvider(requireActivity()).get(CantinaViewModel.class);
         navController = Navigation.findNavController(view);
 
+        final AdminComandaAdapter adminComandaAdapter = new AdminComandaAdapter();
 
-        adminComandaAdapter = new AdminComandaFragment.AdminComandaAdapter();
+        binding.recyclerView.setAdapter(adminComandaAdapter);
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
-        binding.comandas.setAdapter(adminComandaAdapter);
-        binding.comandas.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-
-
-        mDb.collection("comunidad")
-                .orderBy("fecha")
+        mDb.collection("enEspera")
+                .document()
+                .collection("compraPendiente")
                 .addSnapshotListener((value, error) -> {
-                    for (QueryDocumentSnapshot m: value){
-                        comentarios.add(new Comentario(m));
+                    for (QueryDocumentSnapshot m : value) {
+                        compraEnEspera.add(new CompraEnEspera(m));
                     }
                     adminComandaAdapter.notifyDataSetChanged();
-                    binding.comandas.scrollToPosition(comentarios.size() - 1);
+                    binding.recyclerView.scrollToPosition(compraEnEspera.size() + 2);
                 });
     }
 
@@ -84,17 +77,16 @@ public class AdminComandaFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull AdminComandaFragment.AdminComandaViewHolder holder, int position) {
-            Comentario comentario = comentarios.get(position);
+            CompraEnEspera comanda = compraEnEspera.get(position);
 
-            holder.binding.nombre.setText(comentario.usuario);
-
-            Glide.with(AdminComandaFragment.this)
-                    .load(comentario.autorFoto);
+            holder.binding.nombre.setText(comanda.nombre);
+            holder.binding.precio.setText(String.format("%.2f €", comanda.precio));
+            holder.binding.cantidad.setText("x" + comanda.cantidad);
         }
 
         @Override
         public int getItemCount() {
-            return comentarios != null ? comentarios.size() : 0;
+            return compraEnEspera != null ? compraEnEspera.size() : 0;
         }
     }
 

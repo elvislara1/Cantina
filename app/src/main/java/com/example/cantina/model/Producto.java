@@ -30,11 +30,24 @@ public class Producto {
         this.tipo = tipo;
     }
 
+    public Producto(String nombre, double preciod, String img) {
+        this.nombre = nombre;
+        this.preciod = preciod;
+        this.img = img;
+    }
+
     public Producto(QueryDocumentSnapshot qds) {
         productoId = qds.getId();
         this.img = qds.getString("img");
         this.nombre = qds.getString("nombre");
         this.preciod = qds.getDouble("preciod");
         this.tipo = qds.getString("categoria");
+    }
+
+    public Producto(String id, String nombre, String img, double preciod) {
+        productoId = id;
+        this.nombre = nombre;
+        this.preciod = preciod;
+        this.img = img;
     }
 }

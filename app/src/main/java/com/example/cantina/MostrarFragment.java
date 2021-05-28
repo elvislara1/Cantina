@@ -103,20 +103,26 @@ public class MostrarFragment extends Fragment {
                 } else if (cantidad == 1 || cantidad == 2 || cantidad == 3){
                     anadirAlCarrito(user.getUid());
                     mDb.collection("carrito").document(user.getUid()).collection("productoEnCarrito")
-                            .add((new ProductoEnCarrito(producto.productoId, producto.nombre, producto.preciod, producto.img, String.valueOf(cantidad))));
+                            .document(producto.productoId).set((new ProductoEnCarrito(producto.productoId, producto.nombre, producto.preciod, producto.img, String.valueOf(cantidad))));
                     navController.popBackStack();
 
                     Toasty.success(requireActivity(), "¡Producto añadido!", Toast.LENGTH_LONG).show();
                 }
             });
 
-            //TODO
             binding.corazonb.setOnClickListener(v -> {
                 binding.corazonb.setVisibility(View.GONE);
                 binding.corazon.setVisibility(View.VISIBLE);
                 mDb.collection("favorito").document(user.getUid()).collection("productoFavorito")
-                        .add((new ProductoFavorito(producto.productoId, producto.nombre, producto.preciod, producto.img)));
+                        .document(producto.productoId).set((new ProductoFavorito(producto.productoId, producto.nombre, producto.preciod, producto.img)));
                 Toasty.success(getActivity(), "¡Producto añadido a favoritos!",Toast.LENGTH_LONG).show();
+            });
+
+            binding.corazon.setOnClickListener(v -> {
+                binding.corazon.setVisibility(View.GONE);
+                binding.corazonb.setVisibility(View.VISIBLE);
+                mDb.collection("favorito").document(user.getUid()).collection("productoFavorito").document(producto.productoId).delete();
+                Toasty.success(getActivity(), "Producto quitado de favorito",Toast.LENGTH_LONG).show();
             });
 
             CollectionReference reference = mDb.collection("favorito").document(user.getUid()).collection("productoFavorito");

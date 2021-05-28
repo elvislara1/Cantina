@@ -54,7 +54,7 @@
                     android:text="Triangulo"
                     android:layout_gravity="center"
                     android:textColor="@android:color/black"
-                    android:textSize="38sp" />
+                    android:textSize="32sp" />
 
                 <TextView
                     android:id="@+id/price"
